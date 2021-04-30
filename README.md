@@ -38,7 +38,7 @@ More screenshots [above](#more-screenshots).
 3. install celery distributed task queue (see [https://docs.celeryproject.org/en/stable/index.html](https://docs.celeryproject.org/en/stable/index.html))
 4. create a specific account
 5. download Menba source code and deploy it under this account in a specific location
-6. adapt menba/settings.py, menba/wsgi.py and common/config.py
+6. adapt menba/settings.py.sample, menba/wsgi.py.sample, common/config.py.sample and remove '.sample' extension
 
 ## Security
 
