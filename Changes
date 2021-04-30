@@ -1,0 +1,22 @@
+0.0.1 - 01/02/2021
+  - parcours des patients
+  - détails d'un patient
+  - internationalisation des pages
+
+0.0.2 -
+  - formulaire de recherche
+
+0.0.3 - 18/03/2021
+  - un seul et même code /view pour traiter l'affichage des données de parcours ou de recherche
+
+0.0.3.1 - 18/03/2021
+  - breadcrumb contextualisé en lien avec les urls
+
+0.0.4 - 13/04/2021
+  - envoi d'un lien pour télécharger un fichier archive d'étude ou de série
+
+0.0.4.1 - 27/04/2021
+  - navigation par icônes plutôt que boutons
+
+0.1 - 30/04/2021
+  - première version diffusée

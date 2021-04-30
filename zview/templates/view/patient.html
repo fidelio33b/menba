@@ -1,0 +1,165 @@
+{%extends "zhome/base.html" %}
+{%load i18n %}
+{%load static %}
+
+{%block title %}{%translate "patient"|capfirst %}{% endblock title %}
+
+{%block base_body %}
+
+<!-- breadcrumb -->
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="shadow breadcrumb bg-light">
+      <li class="breadcrumb-item active"><a class="s1" href="{%url 'zhome:index' %}">{%translate "home"|capfirst %}</a></li>
+      {%if ref == 'search' %}
+      <li class="breadcrumb-item active"><a class="s1" href="{%url 'zsearch:index' %}">{%translate "search"|capfirst %}</a></li>
+      <li class="breadcrumb-item">{%translate "results"|capfirst %}</li>
+      {%elif ref == 'all' %}
+      <li class="breadcrumb-item active"><a class="s1" href="{%url 'zview:apatients' %}">{%translate "browse"|capfirst %}</a></li>
+      <li class="breadcrumb-item">{%translate "patient"|capfirst %}</li>
+      {%endif %}
+    </ol>
+  </nav>
+</div>
+
+<div class="container">
+
+  <br>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="shadow card">
+        <h5 class="card-header">{%translate "patient"|capfirst %}</h5>
+        <div class="card-body">
+
+	  <table class="table table-hover table-sm table-borderless">
+	    <tbody>
+	      <tr class="text-secondary">
+		<th scope="row">{%translate "name"|capfirst %}</th>
+		<td>{%if patient.MainDicomTags.PatientName %}{{ patient.MainDicomTags.PatientName }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+	      </tr>
+	      <tr class="text-secondary">
+		<th scope="row">{%translate "birthdate"|capfirst %}</th>
+		<td>{%if patient.MainDicomTags.PatientBirthDate %}{{ patient.MainDicomTags.PatientBirthDate }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+	      </tr>
+	      <tr class="text-secondary">
+		<th scope="row">{%translate "sex"|capfirst %}</th>
+		<td>{%if patient.MainDicomTags.PatientSex %}{{ patient.MainDicomTags.PatientSex }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+	      </tr>
+	      <tr class="text-secondary">
+		<th scope="row">{%translate "patient ID"|capfirst %} ({%translate "modality" %})</th>
+		<td>{%if patient.MainDicomTags.PatientID %}{{ patient.MainDicomTags.PatientID }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+	      </tr>
+	    </tbody>
+	  </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%if studies %}
+
+  <br>
+
+  <div class="row">
+    <div class="col-sm">
+      <div class="shadow card">
+        <h5 class="card-header">{%translate "studies"|capfirst %}</h5>
+        <div class="card-body">
+
+	  <!-- Pagination -->
+	  {%if page_obj|length > 0 %}
+	  
+	  {%if page_obj.paginator.num_pages > 1 %}
+	  <nav aria-label="Page navigation example">
+	    <ul class="pagination pagination-sm justify-content-left">
+	      {%if page_obj.has_previous %}
+	      <li class="page-item"><a class="page-link text-secondary" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+	      {%else %}
+	      <li class="page-item disabled"><a class="page-link text-secondary" href="#"><span>&laquo;</span></a></li>
+	      {%endif %}
+	      {%for i in page_obj.paginator.page_range %}
+	      {%if page_obj.number == i %}
+	      <li class="page-item active"><a class="page-link text-white bg-secondary border-secondary" href="#">{{ i }} <span class="sr-only">(current)</span></a></li>
+	      {%else %}
+	      <li class="page-item"><a class="page-link text-secondary" href="?page={{ i }}">{{ i }}</a></li>
+	      {%endif %}
+	      {%endfor %}
+	      {%if page_obj.has_next %}
+	      <li class="page-item"><a class="page-link text-secondary" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+	      {%else %}
+	      <li class="page-item disabled"><a class="page-link text-secondary" href="#"><span>&raquo;</span></a></li>
+	      {%endif %}
+	    </ul>
+	  </nav>
+	  {%endif %}
+	  
+	  {%endif %}
+	  <!-- Fin pagination -->
+
+	  <table class="table table-hover table-sm table-borderless">
+	    <thead class="text-secondary">
+	      <tr>
+		<th></th>
+		<th scope="col">{%translate "description"|capfirst %}</th>
+		<th scope="col">{%translate "procedure"|capfirst %}</th>	
+		<th scope="col">{%translate "study date"|capfirst %}</th>
+		<th scope="col">{%translate "institution name"|capfirst %}</th>
+		<th scope="col">{%translate "referring physician name"|capfirst %}</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      {%for study in studies %}
+	      <tr class="text-secondary">
+		<td><a class="s2" href="../../studies/{{ study.ID }}"><i class="fas fa-info-circle fa-1x" data-toggle="tooltip" data-html="true" data-container="body" title="StudyID : {%if study.MainDicomTags.StudyID %}{{ study.MainDicomTags.StudyID }}{%else %}{%translate "not available"|capfirst %}{%endif %}"></i></a></td>
+		<td>{%if study.MainDicomTags.StudyDescription %}{{ study.MainDicomTags.StudyDescription }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+		<td>{%if study.MainDicomTags.RequestedProcedureDescription %}{{ study.MainDicomTags.RequestedProcedureDescription }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+		<td>{%if study.MainDicomTags.StudyDate %}{{ study.MainDicomTags.StudyDate }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+		<td>{%if study.MainDicomTags.InstitutionName %}{{ study.MainDicomTags.InstitutionName }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+		<td>{%if study.MainDicomTags.ReferringPhysicianName %}{{ study.MainDicomTags.ReferringPhysicianName }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+	      </tr>
+	      {%endfor %}
+	    </tbody>
+	  </table>
+
+	  <!-- Pagination -->
+	  {%if page_obj|length > 0 %}
+
+	  {%if page_obj.paginator.num_pages > 1 %}
+	  <nav aria-label="Page navigation example">
+	    <ul class="pagination pagination-sm justify-content-left">
+	      {%if page_obj.has_previous %}
+	      <li class="page-item"><a class="page-link text-secondary" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+	      {%else %}
+	      <li class="page-item disabled"><a class="page-link text-secondary" href="#"><span>&laquo;</span></a></li>
+	      {%endif %}
+	      {%for i in page_obj.paginator.page_range %}
+	      {%if page_obj.number == i %}
+	      <li class="page-item active"><a class="page-link text-white bg-secondary border-secondary" href="#">{{ i }} <span class="sr-only">(current)</span></a></li>
+	      {%else %}
+	      <li class="page-item"><a class="page-link text-secondary" href="?page={{ i }}">{{ i }}</a></li>
+	      {%endif %}
+	      {%endfor %}
+	      {%if page_obj.has_next %}
+	      <li class="page-item"><a class="page-link text-secondary" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+	      {%else %}
+	      <li class="page-item disabled"><a class="page-link text-secondary" href="#"><span>&raquo;</span></a></li>
+	      {%endif %}
+	    </ul>
+	  </nav>
+	  {%endif %}
+	  
+	  {%endif %}
+	  <!-- Fin pagination -->
+	  
+	  {%else %}
+	  <h4>{%translate "no studies"|capfirst %}</h4>
+	  {%endif %}
+	</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{%endblock base_body %}

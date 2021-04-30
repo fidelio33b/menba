@@ -1,0 +1,32 @@
+{%extends "zhome/base.html" %}
+{%load i18n %}
+{%load static %}
+
+{%block title %}{%translate "home"|capfirst %}{%endblock title %}
+
+{%block base_body %}
+
+<!-- breadcrumb -->
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="shadow breadcrumb bg-light">
+      <li class="breadcrumb-item active" aria-current="page">{%translate "home"|capfirst %}</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="container">
+
+  <br>
+  <img class="mx-auto d-block" src="{% get_media_prefix %}images/png/Logo.Menba.png" alt="Logo Menba" width="400">
+
+  <br>
+  <br>
+
+  <h3>{%translate "pitch title"|capfirst %}</h3>
+
+  {%translate "pitch line" %}
+
+</div>
+
+{%endblock base_body %}
