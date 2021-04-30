@@ -1,0 +1,357 @@
+# This file is part of Menba.
+# Copyright (C) 2021
+#
+# Menba is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Menba is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Menba.  If not, see <https://www.gnu.org/licenses/>.
+#
+# Laurent Lavaud <fidelio33b@gmail.com>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-13 08:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Laurent Lavaud <fidelio33b@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: common/tasks.py:63
+msgid "mail study download pitch %(link)s %(study_description)s %(patient)s"
+msgstr ""
+"# Download serie\n"
+"\n"
+"[Download link](%(link)s)\n"
+"\n"
+"Description : %(study_description)s\n"
+"\n"
+"Patient : %(patient)s"
+
+#: common/tasks.py:118
+#, python-format
+msgid ""
+"mail serie download pitch %(link)s %(serie_description)s "
+"%(study_description)s %(patient)s"
+msgstr ""
+"# Download serie\n"
+"\n"
+"[Download link](%(link)s)\n"
+"\n"
+"Description : %(serie_description)s\n"
+"\n"
+"Study : %(study_description)s\n"
+"\n"
+"Patient : %(patient)s"
+
+#: common/utils.py:77
+msgid "sending mail"
+msgstr "sending mail"
+
+#: common/utils.py:87
+msgid "success"
+msgstr "success"
+
+#: common/utils.py:91
+msgid "error"
+msgstr "error"
+
+#: zhome/templates/zhome/base.html:35 zview/templates/view/patient.html:18
+#: zview/templates/view/patients.html:18 zview/templates/view/serie.html:18
+#: zview/templates/view/serie_download.html:18
+#: zview/templates/view/study.html:18
+#: zview/templates/view/study_download.html:18
+msgid "browse"
+msgstr "browse"
+
+#: zhome/templates/zhome/base.html:38 zsearch/templates/zsearch/index.html:5
+#: zsearch/templates/zsearch/index.html:14
+#: zsearch/templates/zsearch/index.html:61
+#: zsearch/templates/zsearch/index.html:105
+#: zview/templates/view/patient.html:15 zview/templates/view/patients.html:15
+#: zview/templates/view/serie.html:15
+#: zview/templates/view/serie_download.html:15
+#: zview/templates/view/studies.html:15 zview/templates/view/study.html:15
+#: zview/templates/view/study_download.html:15
+msgid "search"
+msgstr "search"
+
+#: zhome/templates/zhome/base.html:41 zstats/templates/zstats/index.html:5
+#: zstats/templates/zstats/index.html:14 zstats/templates/zstats/index.html:27
+msgid "statistics"
+msgstr "statistics"
+
+#: zhome/templates/zhome/base.html:57
+msgid "top of page"
+msgstr "top of page"
+
+#: zhome/templates/zhome/base.html:63
+msgid "resources"
+msgstr "resources"
+
+#: zhome/templates/zhome/base.html:65
+msgid "documentation"
+msgstr "documentation"
+
+#: zhome/templates/zhome/base.html:66
+msgid "contact"
+msgstr "contact"
+
+#: zhome/templates/zhome/base.html:70
+msgid "about"
+msgstr "about"
+
+#: zhome/templates/zhome/index.html:5 zhome/templates/zhome/index.html:13
+#: zsearch/templates/zsearch/index.html:13
+#: zstats/templates/zstats/index.html:13 zview/templates/view/patient.html:13
+#: zview/templates/view/patients.html:13 zview/templates/view/serie.html:13
+#: zview/templates/view/serie_download.html:13
+#: zview/templates/view/studies.html:13 zview/templates/view/study.html:13
+#: zview/templates/view/study_download.html:13
+msgid "home"
+msgstr "home"
+
+#: zhome/templates/zhome/index.html:26
+msgid "pitch title"
+msgstr "Easily browse and export orthanc PACS data !"
+
+#: zhome/templates/zhome/index.html:28
+msgid "pitch line"
+msgstr "Explore and export orthanc PACS data in a simple way."
+
+#: zsearch/forms.py:10 zsearch/forms.py:31
+msgid "starts with"
+msgstr "starts with"
+
+#: zsearch/forms.py:11 zsearch/forms.py:32
+msgid "contains"
+msgstr "contains"
+
+#: zsearch/templates/zsearch/index.html:27
+#: zstats/templates/zstats/index.html:42 zview/templates/view/patients.html:33
+msgid "patients"
+msgstr "patients"
+
+#: zsearch/templates/zsearch/index.html:71
+#: zstats/templates/zstats/index.html:50 zview/templates/view/patient.html:67
+#: zview/templates/view/studies.html:5 zview/templates/view/studies.html:29
+msgid "studies"
+msgstr "studies"
+
+#: zstats/templates/zstats/index.html:34
+msgid "orthanc server"
+msgstr "orthanc server"
+
+#: zstats/templates/zstats/index.html:35 zstats/templates/zstats/index.html:39
+#: zstats/templates/zstats/index.html:43 zstats/templates/zstats/index.html:47
+#: zstats/templates/zstats/index.html:51 zstats/templates/zstats/index.html:55
+#: zview/templates/view/patient.html:39 zview/templates/view/patient.html:43
+#: zview/templates/view/patient.html:47 zview/templates/view/patient.html:51
+#: zview/templates/view/patient.html:114 zview/templates/view/patient.html:115
+#: zview/templates/view/patient.html:116 zview/templates/view/patient.html:117
+#: zview/templates/view/patient.html:118 zview/templates/view/patients.html:79
+#: zview/templates/view/patients.html:80 zview/templates/view/patients.html:81
+#: zview/templates/view/serie.html:42 zview/templates/view/serie.html:46
+#: zview/templates/view/serie_download.html:42
+#: zview/templates/view/serie_download.html:46
+#: zview/templates/view/studies.html:78 zview/templates/view/studies.html:79
+#: zview/templates/view/studies.html:80 zview/templates/view/studies.html:81
+#: zview/templates/view/studies.html:82 zview/templates/view/study.html:42
+#: zview/templates/view/study.html:46 zview/templates/view/study.html:111
+#: zview/templates/view/study.html:113 zview/templates/view/study.html:114
+#: zview/templates/view/study.html:115 zview/templates/view/study.html:116
+#: zview/templates/view/study.html:117
+#: zview/templates/view/study_download.html:42
+#: zview/templates/view/study_download.html:46
+msgid "not available"
+msgstr "not available"
+
+#: zstats/templates/zstats/index.html:38
+msgid "instances"
+msgstr "instances"
+
+#: zstats/templates/zstats/index.html:46 zview/templates/view/study.html:62
+msgid "series"
+msgstr "series"
+
+#: zstats/templates/zstats/index.html:54
+msgid "disk size"
+msgstr "disk size"
+
+#: zstats/templates/zstats/index.html:60
+msgid "no statistics"
+msgstr "no statistics"
+
+#: zview/templates/view/patient.html:5 zview/templates/view/patient.html:19
+#: zview/templates/view/patient.html:32 zview/templates/view/serie.html:20
+#: zview/templates/view/serie_download.html:20
+#: zview/templates/view/study.html:20
+#: zview/templates/view/study_download.html:20
+msgid "patient"
+msgstr "patient"
+
+#: zview/templates/view/patient.html:16 zview/templates/view/patients.html:16
+#: zview/templates/view/serie.html:16
+#: zview/templates/view/serie_download.html:16
+#: zview/templates/view/studies.html:16 zview/templates/view/study.html:16
+#: zview/templates/view/study_download.html:16
+msgid "results"
+msgstr "results"
+
+#: zview/templates/view/patient.html:38 zview/templates/view/patients.html:69
+msgid "name"
+msgstr "name"
+
+#: zview/templates/view/patient.html:42 zview/templates/view/patients.html:71
+msgid "birthdate"
+msgstr "birthdate"
+
+#: zview/templates/view/patient.html:46 zview/templates/view/patients.html:70
+msgid "sex"
+msgstr "sex"
+
+#: zview/templates/view/patient.html:50
+msgid "patient ID"
+msgstr "patient ID"
+
+#: zview/templates/view/patient.html:50 zview/templates/view/study.html:99
+msgid "modality"
+msgstr "modality"
+
+#: zview/templates/view/patient.html:103 zview/templates/view/serie.html:41
+#: zview/templates/view/serie_download.html:41
+#: zview/templates/view/studies.html:67 zview/templates/view/study.html:41
+#: zview/templates/view/study.html:98
+#: zview/templates/view/study_download.html:41
+msgid "description"
+msgstr "description"
+
+#: zview/templates/view/patient.html:104 zview/templates/view/studies.html:68
+msgid "procedure"
+msgstr "procedure"
+
+#: zview/templates/view/patient.html:105 zview/templates/view/studies.html:69
+msgid "study date"
+msgstr "study date"
+
+#: zview/templates/view/patient.html:106 zview/templates/view/studies.html:70
+msgid "institution name"
+msgstr "institution name"
+
+#: zview/templates/view/patient.html:107 zview/templates/view/studies.html:71
+msgid "referring physician name"
+msgstr "referring physician name"
+
+#: zview/templates/view/patient.html:119 zview/templates/view/patients.html:83
+#: zview/templates/view/studies.html:83
+msgid "details"
+msgstr "details"
+
+#: zview/templates/view/patient.html:156 zview/templates/view/studies.html:122
+msgid "no studies"
+msgstr "no studies"
+
+#: zview/templates/view/patients.html:5
+msgid "all patients"
+msgstr "all patients"
+
+#: zview/templates/view/patients.html:72
+msgid "number of studies"
+msgstr "number of studies"
+
+#: zview/templates/view/patients.html:122
+msgid "no patients"
+msgstr "no patients"
+
+#: zview/templates/view/serie.html:5 zview/templates/view/serie.html:22
+#: zview/templates/view/serie.html:35
+#: zview/templates/view/serie_download.html:22
+msgid "serie"
+msgstr "serie"
+
+#: zview/templates/view/serie.html:45
+#: zview/templates/view/serie_download.html:45
+#: zview/templates/view/study.html:45 zview/templates/view/study.html:101
+#: zview/templates/view/study_download.html:45
+msgid "date"
+msgstr "date"
+
+#: zview/templates/view/serie_download.html:5
+#: zview/templates/view/serie_download.html:35
+msgid "serie download"
+msgstr "serie download"
+
+#: zview/templates/view/serie_download.html:56
+#, python-format
+msgid "serie download pitch %(email_field)s."
+msgstr ""
+"<b>Getting files in progress.</b><br>This task can "
+"last few minutes.<br>An email with the download link will be sent to %(email_field)s afterwards."
+
+#: zview/templates/view/study.html:5 zview/templates/view/study.html:22
+#: zview/templates/view/study.html:35
+#: zview/templates/view/study_download.html:22
+msgid "study"
+msgstr "study"
+
+#: zview/templates/view/study.html:35 zview/templates/view/study.html:118
+msgid "download"
+msgstr "download"
+
+#: zview/templates/view/study.html:62 zview/templates/view/study.html:118
+msgid "view"
+msgstr "view"
+
+#: zview/templates/view/study.html:100
+msgid "manufacturer"
+msgstr "manufacturer"
+
+#: zview/templates/view/study.html:102
+msgid "hour"
+msgstr "hour"
+
+#: zview/templates/view/study.html:103
+msgid "number of instances"
+msgstr "number of instances"
+
+#: zview/templates/view/study.html:155
+msgid "no series"
+msgstr "no series"
+
+#: zview/templates/view/study_download.html:5
+#: zview/templates/view/study_download.html:35
+msgid "study download"
+msgstr "study download"
+
+#: zview/templates/view/study_download.html:56
+#, python-format
+msgid "study download pitch %(email_field)s."
+msgstr ""
+"<b>Getting files in progress.</b><br>This task can "
+"last few minutes.<br>An email with the download link will be sent to %(email_field)s afterwards."
+
+#~ msgid "all studies"
+#~ msgstr "all studies"
+
+#~ msgid "all series"
+#~ msgstr "all series"
+
+#~ msgid "number of slices"
+#~ msgstr "number of slices"
+
+#~ msgid "study id"
+#~ msgstr "study id"

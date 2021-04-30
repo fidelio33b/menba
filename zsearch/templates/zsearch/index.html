@@ -1,0 +1,117 @@
+{%extends "zhome/base.html" %}
+{%load i18n %}
+{%load static %}
+
+{%block title %}{%translate "search"|capfirst %}{%endblock title %}
+
+{%block base_body %}
+
+<!-- breadcrumb -->
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="shadow breadcrumb bg-light">
+      <li class="breadcrumb-item active"><a class="s1" href="{%url 'zhome:index' %}">{%translate "home"|capfirst %}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{%translate "search"|capfirst %}</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="container">
+
+  <br>
+
+  <div class="row">
+    
+    <div class="col-sm-6">
+      <div class="shadow card">
+	<h5 class="card-header">{%translate "patients"|capfirst %}</h5>
+	<div class="card-body">
+	  <form action="/search/patients/" method="post">
+	    {% csrf_token %}
+	    {{ patientform.non_field_errors }}
+
+	    <div class="form-group row">
+	      <div class="col">
+		<div class="input-group mb-3">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="basic-addon-tag-patient">TAG</span>
+		  </div>
+		  {{ patientform.patient_tag }}	      
+		</div>
+	      </div>
+	    </div>
+
+	    <div class="form-group row align-items-center">
+	      <div class="col">
+		<div class="btn-group btn-group-toggle" data-toggle="buttons">
+		  {% for scope in patientform.search_scope %}
+		  <label class="btn btn-secondary">
+		    {{ scope.tag }}{{ scope.choice_label }}
+		  </label>
+		  {% endfor %}
+		</div>
+	      </div>
+	      <div class="col-auto">		
+		  {{ patientform.patient_search_text }}
+	      </div>
+	    </div>
+
+	    <div class="form-group row">
+	      <div class="col">		
+		<button type="submit" class="btn btn-primary" name="{{patientform.prefix}}" value="Submit">{%translate "search"|capfirst %}</button>
+	      </div>
+	    </div>
+	  </form>
+	</div>
+      </div>
+    </div>
+  
+    <div class="col-sm-6">
+      <div class="shadow card">
+	<h5 class="card-header">{%translate "studies"|capfirst %}</h5>
+	<div class="card-body">
+	  <form action="/search/studies/" method="post">
+	    {% csrf_token %}
+	    {{ studyform.non_field_errors }}
+
+	    <div class="form-group row">
+	      <div class="col">
+		<div class="input-group mb-3">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="basic-addon-tag-study">TAG</span>
+		  </div>
+		  {{ studyform.study_tag }}	      
+		</div>
+	      </div>
+	    </div>
+
+	    <div class="form-group row align-items-center">
+	      <div class="col">
+		<div class="btn-group btn-group-toggle" data-toggle="buttons">
+		  {% for scope in studyform.search_scope %}
+		  <label class="btn btn-secondary">
+		    {{ scope.tag }}{{ scope.choice_label }}
+		  </label>
+		  {% endfor %}
+		</div>
+	      </div>
+	      <div class="col-auto">		
+		{{ studyform.study_search_text }}
+	      </div>
+	    </div>
+
+	    <div class="form-group row">
+	      <div class="col">		
+		<button type="submit" class="btn btn-primary" name="{{studyform.prefix}}" value="Submit">{%translate "search"|capfirst %}</button>
+	      </div>
+	    </div>
+	  </form>
+	</div>
+      </div>
+    </div>
+  
+    <!-- studyName StudyDescription SeriesDescription -->
+
+</div>
+
+{%endblock base_body %}

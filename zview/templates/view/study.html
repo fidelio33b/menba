@@ -1,0 +1,163 @@
+{%extends "zhome/base.html" %}
+{%load i18n %}
+{%load static %}
+
+{%block title %}{%translate "study"|capfirst %}{% endblock title %}
+
+{%block base_body %}
+
+<!-- breadcrumb -->
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="shadow breadcrumb bg-light">
+      <li class="breadcrumb-item active"><a class="s1" href="{%url 'zhome:index' %}">{%translate "home"|capfirst %}</a></li>
+      {%if ref == 'search' %}
+      <li class="breadcrumb-item active"><a class="s1" href="{%url 'zsearch:index' %}">{%translate "search"|capfirst %}</a></li>
+      <li class="breadcrumb-item">{%translate "results"|capfirst %}</li>
+      {%elif ref == 'all' %}
+      <li class="breadcrumb-item active"><a class="s1" href="{%url 'zview:apatients' %}">{%translate "browse"|capfirst %}</a></li>
+      {%if patient.MainDicomTags.PatientName %}
+      <li class="breadcrumb-item active"><a class="s1" href="{%url 'zview:apatient' patient.ID %}">{%translate "patient"|capfirst %}</a></li>
+      {%endif %}
+      <li class="breadcrumb-item">{%translate "study"|capfirst %}</li>
+      {%endif %}
+    </ol>
+  </nav>
+</div>
+
+<div class="container">
+
+  <br>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="shadow card">
+	<h5 class="card-header"><a class="s2" href="download/"><i class="fas fa-save fa-1x" data-toggle="tooltip" data-html="true" data-container="body" title="{%translate "download"|capfirst %}"></i></a>&nbsp;{%translate "study"|capfirst %}</h5>
+        <div class="card-body">
+	  <table class="table table-hover table-sm table-borderless">
+	    <tbody>
+	      <tr class="text-secondary">
+		<td scope="col">{%translate "description"|capfirst %}</td>
+		<td>{%if study.MainDicomTags.StudyDescription %}{{ study.MainDicomTags.StudyDescription }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+	      </tr>
+	      <tr class="text-secondary">
+		<td scope="col">{%translate "date"|capfirst %}</td>
+		<td>{%if study.MainDicomTags.StudyDate %}{{ study.MainDicomTags.StudyDate }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+      </div>
+    </div>
+  </div>
+
+  {%if series %}
+  
+  <br>
+  
+  <div class="row">
+    <div class="col-sm">
+      <div class="shadow card">
+	<h5 class="card-header"><a class="s2" href="{{ params.stone_web_viewer.url }}{{ study.MainDicomTags.StudyInstanceUID}}" target="_blank"><i class="fas fa-eye fa-1x" data-toggle="tooltip" data-html="true" data-container="body" title="{%translate "view"|capfirst %}"></i></a>&nbsp;{%translate "series"|capfirst %}</h5>
+        <div class="card-body">
+	  
+	  <!-- Pagination -->
+	  {%if page_obj|length > 0 %}
+
+	  {%if page_obj.paginator.num_pages > 1 %}
+	  <nav aria-label="Page navigation example">
+	    <ul class="pagination pagination-sm justify-content-left">
+	      {%if page_obj.has_previous %}
+	      <li class="page-item"><a class="page-link text-secondary" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+	      {%else %}
+	      <li class="page-item disabled"><a class="page-link text-secondary" href="#"><span>&laquo;</span></a></li>
+	      {%endif %}
+	      {%for i in page_obj.paginator.page_range %}
+	      {%if page_obj.number == i %}
+	      <li class="page-item active"><a class="page-link text-white bg-secondary border-secondary" href="#">{{ i }} <span class="sr-only">(current)</span></a></li>
+	      {%else %}
+	      <li class="page-item"><a class="page-link text-secondary" href="?page={{ i }}">{{ i }}</a></li>
+	      {%endif %}
+	      {%endfor %}
+	      {%if page_obj.has_next %}
+	      <li class="page-item"><a class="page-link text-secondary" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+	      {%else %}
+	      <li class="page-item disabled"><a class="page-link text-secondary" href="#"><span>&raquo;</span></a></li>
+	      {%endif %}
+	    </ul>
+	  </nav>
+	  {%endif %}
+	  
+	  {%endif %}
+	  <!-- Fin pagination -->
+
+	  <table class="table table-hover table-sm table-borderless">
+	    <thead class="text-secondary">
+	      <tr>
+		<th scope="col"></th>
+		<th scope="col">{%translate "description"|capfirst %}</th>
+		<th scope="col">{%translate "modality"|capfirst %}</th>
+		<th scope="col">{%translate "manufacturer"|capfirst %}</th>
+		<th scope="col">{%translate "date"|capfirst %}</th>
+		<th scope="col">{%translate "hour"|capfirst %}</th>
+		<th scope="col">{%translate "number of instances"|capfirst %}</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      {%for serie in series %}
+	      <tr class="text-secondary">
+		<td>
+		  <a class="s2" href="{{ params.web_viewer.url }}{{ serie.ID }}" target="_blank"><i class="fas fa-eye fa-1x" data-toggle="tooltip" data-html="true" data-container="body" title="BodyPartExamined : {%if serie.MainDicomTags.BodyPartExamined %}{{ serie.MainDicomTags.BodyPartExamined }}{%else %}{%translate "not available"|capfirst %}{%endif %}<br>StationName : {%if serie.MainDicomTags.StationName %}{{ serie.MainDicomTags.StationName }}{%else %}{%translate "not available"|capfirst %}{%endif %}"></i></a>
+  		  <a class="s2" href="{%if ref == 'all' %}{%url 'zview:aserie' serie.ID %}{%else %}{%url 'zsearch:sserie' serie.ID %}{%endif %}download/"><i class="fas fa-save fa-1x" data-toggle="tooltip" data-html="true" data-container="body" title="{%translate "download"|capfirst %}"></i></a>	  		</td>		
+		<td>{%if serie.MainDicomTags.SeriesDescription %}{{ serie.MainDicomTags.SeriesDescription }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+		<td>{%if serie.MainDicomTags.Modality %}{{ serie.MainDicomTags.Modality }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+		<td>{%if serie.MainDicomTags.Manufacturer %}{{ serie.MainDicomTags.Manufacturer }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+		<td>{%if serie.MainDicomTags.SeriesDate %}{{ serie.MainDicomTags.SeriesDate }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+		<td>{%if serie.MainDicomTags.SeriesTime %}{{ serie.MainDicomTags.SeriesTime }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+		<td>{%if serie.Instances %}{{ serie.Instances|length }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
+	      </tr>
+	      {%endfor %}
+	    </tbody>
+	  </table>
+	  
+	  <!-- Pagination -->
+	  {%if page_obj|length > 0 %}
+
+	  {%if page_obj.paginator.num_pages > 1 %}
+	  <nav aria-label="Page navigation example">
+	    <ul class="pagination pagination-sm justify-content-left">
+	      {%if page_obj.has_previous %}
+	      <li class="page-item"><a class="page-link text-secondary" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+	      {%else %}
+	      <li class="page-item disabled"><a class="page-link text-secondary" href="#"><span>&laquo;</span></a></li>
+	      {%endif %}
+	      {%for i in page_obj.paginator.page_range %}
+	      {%if page_obj.number == i %}
+	      <li class="page-item active"><a class="page-link text-white bg-secondary border-secondary" href="#">{{ i }} <span class="sr-only">(current)</span></a></li>
+	      {%else %}
+	      <li class="page-item"><a class="page-link text-secondary" href="?page={{ i }}">{{ i }}</a></li>
+	      {%endif %}
+	      {%endfor %}
+	      {%if page_obj.has_next %}
+	      <li class="page-item"><a class="page-link text-secondary" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+	      {%else %}
+	      <li class="page-item disabled"><a class="page-link text-secondary" href="#"><span>&raquo;</span></a></li>
+	      {%endif %}
+	    </ul>
+	  </nav>
+	  {%endif %}
+	  
+	  {%endif %}
+	  <!-- Fin pagination -->
+
+	  {%else %}
+	  <h4>{%translate "no series"|capfirst %}</h4>
+	  {%endif %}
+
+	</div>
+      </div>
+    </div>
+  </div>	  
+</div>
+
+{%endblock base_body %}

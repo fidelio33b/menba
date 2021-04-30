@@ -1,0 +1,32 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+    padding-top: 5rem;
+    padding-bottom: 3rem;
+    color: #5a5a5a;
+}
+
+.tooltip-inner {
+    max-width: 800px;
+    text-align:left;
+}
+
+/* Orange */
+a.s1 {
+    color: #ed7d31;
+}
+
+a.s1:hover {
+    color: #ed7d31;
+}
+
+/* Gris */
+a.s2 {
+    color: #6c757d;
+}
+
+a.s2:hover {
+    color: #6c757d;
+}
