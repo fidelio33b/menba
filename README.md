@@ -4,11 +4,11 @@
 
 This projects provides another way to browse and download [orthanc](https://www.orthanc-server.com) data.
 
-Written in python and [django framework](https://www.djangoproject.com/), for use under linux (not tested but should work under *BSD).
+Written in python and django framework, for use under linux (not tested but should work under *BSD).
 
 ## Features
 
-- connect to an existing orthanc server
+- connect to an existing [orthanc server](https://www.orthanc-server.com)
 - browse data (patients/studies/series)
 - search data (patients/studies)
 - retrieve archives of data (studies/series) via a download link sent by email for security reasons
