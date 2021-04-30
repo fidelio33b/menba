@@ -20,7 +20,7 @@ Written in python and [django framework](https://www.djangoproject.com/), for us
 
 ![](./screenshots/Menba.01.jpg)
 
-More screenshots above.
+More screenshots [above](#more-screenshots).
 
 ## Prerequisites
 
