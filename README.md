@@ -1,6 +1,6 @@
 # Menba
 
-## Explore and export orthanc data easily !
+## Easily browse and export orthanc PACS data !
 
 This projects provides another way to browse and download [orthanc](https://www.orthanc-server.com) data.
 
