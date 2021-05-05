@@ -42,7 +42,7 @@ More screenshots [above](#more-screenshots).
 
 ### Long way
 
-See [INSTALL](./INSTALL) file for an "all in one" deployment.
+See [INSTALL.md](./INSTALL.md) file for an "all in one" deployment.
 
 ## Security
 
