@@ -686,6 +686,8 @@ Note: you have to adapt orthanc server host and web viewer url, as well as links
 
 ### Launch commands
 
+All commands have to be launched as menba user.
+
 ```
 cd /home/menba/menba
 ```
