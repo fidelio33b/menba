@@ -35,10 +35,14 @@ More screenshots [above](#more-screenshots).
 
 1. install your distribution's version of apache or nginx
 2. install the django framework (see [https://www.djangoproject.com/](https://www.djangoproject.com/)) with apache or nginx integration
-3. install celery distributed task queue (see [https://docs.celeryproject.org/en/stable/index.html](https://docs.celeryproject.org/en/stable/index.html))
+3. install celery distributed task queue (see [https://docs.celeryproject.org/en/stable/index.html](https://docs.celeryproject.org/en/stable/index.html)) and connect it to an existing amqp broker (or deploy your own)
 4. create a specific account
 5. download Menba source code and deploy it under this account in a specific location
 6. adapt menba/settings.py.sample, menba/wsgi.py.sample, common/config.py.sample and remove '.sample' extension
+
+### Long way
+
+See [INSTALL](./INSTALL) file for an "all in one" deployment.
 
 ## Security
 
