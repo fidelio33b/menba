@@ -131,6 +131,8 @@ Create `/etc/apache2/sites-available/menba.conf` with the following content :
 </VirtualHost>
 ```
 
+Note: adapt `ServerName` directive with the ip/fqdn corresponding to your server.
+
 Activate the correct configuration :
 
 ```
@@ -148,8 +150,6 @@ htpasswd -c /etc/apache2/private/htpasswd menba
 ## Django
 
 All commands executed as root.
-
-### Installation
 
 ```
 pip3 install Django==3.2.1
@@ -217,6 +217,8 @@ chmod u+x install_rabbitmq.sh
 
 ### Configuration
 
+Create user, vhost and associated permissions :
+
 ```
 rabbitmqctl add_user menba super.secret
 rabbitmqctl add_vhost menba
@@ -283,7 +285,7 @@ CELERYBEAT_LOG_FILE="/var/log/celery/beat.log"
 
 ### systemd
 
-Create the `/etc/systemd/system/celery.service` file :
+To automate starting process of celery, create `/etc/systemd/system/celery.service` file :
 
 ```
 [Unit]
@@ -312,7 +314,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Then activate :
+Then activate auto-start service :
 
 ```
 systemctl enable celery.service
@@ -548,7 +550,9 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 ```
 
-Note: email sending will only work with a correct configuration !
+Note 1: adapt `ALLOWED_HOSTS` directive with the ip/fqdn corresponding to your server.
+
+Note 2: email sending will only work with a correct configuration !
 
 #### wsgi.py
 
@@ -700,6 +704,6 @@ python3 manage.py createsuperuser
 
 ## Finally
 
-Restart the server, point your browser to http://192.168.0.2/ (adapt) and...
+Restart the server, point your browser to (adapt accordingly) http://192.168.0.2/ and...
 
 ## Enjoy !
