@@ -6,18 +6,18 @@ Following this step by step guide, you will get a ready to use "all in one" serv
 - celery
 - django
 
-Of course, someone could split some parts of the solution, like rabbitmq server for example.
+Of course, someone could split some parts of the solution to distribute load, like rabbitmq server for example.
 
 Obviously, security should be hardened by enabling ssl, but this is out of the scope of this document.
 
 ## Operating system
 
-This guide is based on an installation of ubuntu 20.04 LTS. 
+This guide is based on a running ubuntu 20.04 LTS server.
 
 Should work on
 - ubuntu 18.04 LTS with few or even no adaptation
 - any linux distro with some adaptations
-- BSD systems (to be verified) with some adaptations
+- BSD systems (eg. OpenBSD, NetBSD, FreeBSD) with some adaptations
 
 ## Packages
 
@@ -138,7 +138,7 @@ a2dissite 000-default.conf
 a2ensite menba.conf
 ```
 
-Create `password` file :
+Create `password` file and add an account :
 
 ```
 mkdir /etc/apache2/private
@@ -319,7 +319,6 @@ systemctl enable celery.service
 systemctl start celery.service
 ```
 
-
 ## Menba
 
 ### Configuration
@@ -335,7 +334,7 @@ Create download repository :
 
 ```
 mkdir -p /var/lib/menba/files/{studies,series}
-chown -R menba: /var/lib/menba
+chown -R menba:menba /var/lib/menba
 ```
 
 ### Preparation
@@ -360,7 +359,7 @@ pwd
 /home/menba
 ```
 
-### Download code :
+### Download the code :
 
 ```
 git clone https://github.com/fidelio33b/menba.git
@@ -647,13 +646,13 @@ params = {
         'ortc01': {
             'host': 'orthanc-server01',
             'port': 8042,
-            'user': 'exchanges',
+            'user': 'read-only',
             'password': 'super.secret',
         },
         'ortc02': {
             'host': 'orthanc-server02',
             'port': 8042,
-            'user': 'exchanges',
+            'user': 'read-only',
             'password': 'super.secret',
         },
     },
@@ -679,7 +678,7 @@ params = {
 }
 ```
 
-Note: you have to adapt orthanc server host and url, as well as links.
+Note: you have to adapt orthanc server host and web viewer url, as well as links.
 
 ### Launch commands
 
@@ -703,4 +702,4 @@ python3 manage.py createsuperuser
 
 Restart the server, point your browser to http://192.168.0.2/ (adapt) and...
 
-## Enjoy
+## Enjoy !
