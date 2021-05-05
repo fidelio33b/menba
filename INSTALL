@@ -2,7 +2,7 @@
 
 Following this step by step guide, you will get a ready to use "all in one" server based on :
 - apache web server (could be ngnix or any web server compatible with django)
-- rabbitqm amqp broker (could be any amqp broker compatible with celery)
+- rabbitmq amqp broker (could be any amqp broker compatible with celery)
 - celery
 - django
 
