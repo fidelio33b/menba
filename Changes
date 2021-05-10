@@ -23,3 +23,6 @@
 
 0.1.1 - 05/05/2021
   - procédure complète d'installation "all in one" dans le fichier INSTALL
+
+0.1.2 - 10/05/2021
+  - script d'installation automatique type "all in one" pour distros ubuntu (bionic et focal)
