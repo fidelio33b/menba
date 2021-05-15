@@ -51,6 +51,9 @@ def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=N
     
     try:
 
+        # Positionne syslog
+        syslog.openlog(ident='utils/send_mail', logoption=syslog.LOG_PID, facility=syslog.LOG_INFO)
+
         # Génère le corps au format html si nécessaire
         if body_html is None:
 
@@ -74,7 +77,7 @@ def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=N
             msg.attach_file(attach)
 
         # On log l'envoi
-        syslog.syslog(syslog.LOG_INFO, '{} - {} : {} -> {}'.format(unik, _('sending mail'), sender, recipients))
+        syslog.syslog('{} - {} : {} -> {}'.format(unik, _('sending mail'), sender, recipients))
 
         # Envoi du mail
         msg.send()
@@ -91,5 +94,9 @@ def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=N
         msg = '{} - {} - send_mail : {}'.format(unik, _('error'), str(e))
         print(msg)
         syslog.syslog(syslog.LOG_ERR, msg)
+
+    finally:
+        # Ferme syslog
+        syslog.closelog()
 
     return success
