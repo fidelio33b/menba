@@ -1,3 +1,23 @@
+"""
+This file is part of Menba.
+Copyright (C) 2021
+
+Menba is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Menba is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Menba.  If not, see <https://www.gnu.org/licenses/>.
+
+Laurent Lavaud <fidelio33b@gmail.com>, 2021.
+"""
+
 import syslog
 import requests
 
@@ -8,6 +28,10 @@ from celery import shared_task
 
 from common.config import params
 from common.utils import send_mail
+
+# Timeout for to stop requests waiting for a response after a given number of seconds
+#   - https://docs.python-requests.org/en/latest/user/quickstart/#timeouts
+TIMEOUT_GET_REQUEST=1
 
 @shared_task
 def STDownloadStudy(api_url, verify_cert, user, password, study_id, user_email, study, patient):
@@ -33,7 +57,7 @@ def STDownloadStudy(api_url, verify_cert, user, password, study_id, user_email, 
         # Recherche de l'étude
         REST = '/studies'
         full_url = api_url + REST + '/' + study_id + '/archive'
-        data = connection.get(full_url, headers=headers, verify=verify_cert, stream=True)
+        data = connection.get(full_url, headers=headers, verify=verify_cert, stream=True, timeout=TIMEOUT_GET_REQUEST)
 
         # Stockage du flux archive dans un fichier
         directory = params['files']['directory']['studies']
@@ -97,7 +121,7 @@ def STDownloadSerie(api_url, verify_cert, user, password, serie_id, user_email, 
         # Recherche de l'étude
         REST = '/studies'
         full_url = api_url + REST + '/' + serie_id + '/archive'
-        data = connection.get(full_url, headers=headers, verify=verify_cert, stream=True)
+        data = connection.get(full_url, headers=headers, verify=verify_cert, stream=True, timeout=TIMEOUT_GET_REQUEST)
 
         # Stockage du flux archive dans un fichier
         directory = params['files']['directory']['series']

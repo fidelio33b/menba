@@ -23,6 +23,10 @@ import json
 
 from common.tasks import STDownloadStudy, STDownloadSerie
 
+# Timeout for to stop requests waiting for a response after a given number of seconds
+#   - https://docs.python-requests.org/en/latest/user/quickstart/#timeouts
+TIMEOUT_GET_REQUEST=1
+
 #       _                    
 #   ___| | __ _ ___ ___  ___ 
 #  / __| |/ _` / __/ __|/ _ \
@@ -92,8 +96,8 @@ class ORTC:
             # Recherche des patients
             REST = '/patients'
             full_url = self.api_url + REST
-            donnees = connection.get(full_url, headers=headers, verify=self.verify_cert)
-            patients_list = json.loads(donnees.text)
+            data = connection.get(full_url, headers=headers, verify=self.verify_cert, timeout=TIMEOUT_GET_REQUEST)
+            patients_list = json.loads(data.text)
             
             # Stocke les données
             patients = []
@@ -137,7 +141,7 @@ class ORTC:
             # Recherche du patient
             REST = '/patients'
             full_url = self.api_url + REST + '/' + patient_id
-            data = connection.get(full_url, headers=headers, verify=self.verify_cert)
+            data = connection.get(full_url, headers=headers, verify=self.verify_cert, timeout=TIMEOUT_GET_REQUEST)
             patient_detail = json.loads(data.text)
 
             # Stocke certaines données
@@ -174,7 +178,7 @@ class ORTC:
             # Recherche de l'étude
             REST = '/studies'
             full_url = self.api_url + REST + '/' + study_id
-            data = connection.get(full_url, headers=headers, verify=self.verify_cert)
+            data = connection.get(full_url, headers=headers, verify=self.verify_cert, timeout=TIMEOUT_GET_REQUEST)
             study_details = json.loads(data.text)
 
             # Stocke certaines données
@@ -249,7 +253,7 @@ class ORTC:
             # Recherche de la série
             REST = '/series'
             full_url = self.api_url + REST + '/' + serie_id
-            data = connection.get(full_url, headers=headers, verify=self.verify_cert)
+            data = connection.get(full_url, headers=headers, verify=self.verify_cert, timeout=TIMEOUT_GET_REQUEST)
             serie_details = json.loads(data.text)
 
             # Stocke certaines données
@@ -324,7 +328,7 @@ class ORTC:
             # Recherche de la série
             REST = '/statistics'
             full_url = self.api_url + REST
-            data = connection.get(full_url, headers=headers, verify=self.verify_cert)
+            data = connection.get(full_url, headers=headers, verify=self.verify_cert, timeout=TIMEOUT_GET_REQUEST)
             stats_details = json.loads(data.text)
 
             # Stocke les données
@@ -367,7 +371,7 @@ class ORTC:
             # Recherche
             REST = '/tools/find'
             full_url = self.api_url + REST
-            data = connection.post(full_url, data=json.dumps(payload, ensure_ascii=False).encode('utf-8'), headers=headers, verify=self.verify_cert)
+            data = connection.post(full_url, data=json.dumps(payload, ensure_ascii=False).encode('utf-8'), headers=headers, verify=self.verify_cert, timeout=TIMEOUT_GET_REQUEST)
             results_details = json.loads(data.text)
 
             # Stocke les données
