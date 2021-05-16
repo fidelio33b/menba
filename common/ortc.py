@@ -20,12 +20,13 @@ Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 
 import requests
 import json
+import uuid
 
 from common.tasks import STDownloadStudy, STDownloadSerie
 
 # Timeout for to stop requests waiting for a response after a given number of seconds
 #   - https://docs.python-requests.org/en/latest/user/quickstart/#timeouts
-TIMEOUT_GET_REQUEST=1
+TIMEOUT_GET_REQUEST=(2, 120)
 
 #       _                    
 #   ___| | __ _ ___ ___  ___ 
@@ -49,6 +50,7 @@ class ORTC:
     password = None
     api_url = None
     verify_cert = False
+    transaction_id = None
 
     #                      _                   _                  
     #   ___ ___  _ __  ___| |_ _ __ _   _  ___| |_ ___ _   _ _ __ 
@@ -64,13 +66,18 @@ class ORTC:
         self.password = password
         self.api_url = 'http://{}:{}'.format(self.host, self.port)
         self.verify_cert = verify_cert
+        self.SetNewTransactionID()
 
     #                 _   _               _           
     #  _ __ ___   ___| |_| |__   ___   __| | ___  ___ 
     # | '_ ` _ \ / _ \ __| '_ \ / _ \ / _` |/ _ \/ __|
     # | | | | | |  __/ |_| | | | (_) | (_| |  __/\__ \
     # |_| |_| |_|\___|\__|_| |_|\___/ \__,_|\___||___/
-    #                                                 
+    #
+
+    # Génère un nouveau numéro de transaction
+    def SetNewTransactionID(self):
+        self.transaction_id = str(uuid.uuid4())[:8]
 
     # Récupère les patients
     def GetPatients(self):
@@ -402,7 +409,7 @@ class ORTC:
                 patient = self.GetPatient(study['ParentPatient'])
 
             # Lance en // la tâche de récupération de l'étude
-            success = STDownloadStudy.delay(self.api_url, self.verify_cert, self.user, self.password, study_id, django_user.email, study, patient)
+            success = STDownloadStudy.delay(self.api_url, self.verify_cert, self.user, self.password, study_id, django_user.email, study, patient, self.transaction_id)
             
         except Exception as e:
             print('common/ortc.py/DownloadStudy')
@@ -432,7 +439,7 @@ class ORTC:
                     patient = self.GetPatient(study['ParentPatient'])
 
             # Lance en // la tâche de récupération de l'étude
-            success = STDownloadSerie.delay(self.api_url, self.verify_cert, self.user, self.password, serie_id, django_user.email, serie, study, patient)
+            success = STDownloadSerie.delay(self.api_url, self.verify_cert, self.user, self.password, serie_id, django_user.email, serie, study, patient, self.transaction_id)
             
         except Exception as e:
             print('common/ortc.py/DownloadSerie')

@@ -18,7 +18,6 @@ along with Menba.  If not, see <https://www.gnu.org/licenses/>.
 Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 """
 
-import syslog
 import requests
 
 from django.utils.translation import gettext as _
@@ -27,19 +26,21 @@ from time import sleep as tsleep
 from celery import shared_task
 
 from common.config import params
-from common.utils import send_mail
+from common.utils import send_mail, zlog
 
 # Timeout for to stop requests waiting for a response after a given number of seconds
 #   - https://docs.python-requests.org/en/latest/user/quickstart/#timeouts
-TIMEOUT_GET_REQUEST=1
+TIMEOUT_GET_REQUEST=(2, 120)
 
 @shared_task
-def STDownloadStudy(api_url, verify_cert, user, password, study_id, user_email, study, patient):
+def STDownloadStudy(api_url, verify_cert, user, password, study_id, user_email, study, patient, transaction_id):
 
     # Donnera le résultat de l'opération
     success = False
         
     try:
+        # Log
+        zlog('downloading study {} for {}'.format(study_id, user_email), transaction_id)
 
         # Désactive les avertissements du module
         if not verify_cert:
@@ -67,6 +68,9 @@ def STDownloadStudy(api_url, verify_cert, user, password, study_id, user_email, 
             for chunk in data.iter_content(chunk_size=128):
                 fd.write(chunk)
 
+        # Log
+        zlog('study succesfully downloaded', transaction_id)
+
         # Envoi du mail avec le lien de téléchargement
         if user_email is not None:
             subject = '['+ params['app']['name'] + '] - ' + 'Download link'
@@ -83,10 +87,11 @@ Patient : {}
 
 """.format(link, study['MainDicomTags']['StudyDescription'], patient['MainDicomTags']['PatientName'])
 
-            # A trduire...
+            # A traduire...
             body_md = _('mail study download pitch %(link)s %(study_description)s %(patient)s') % {'link': link, 'study_description': study['MainDicomTags']['StudyDescription'], 'patient': patient['MainDicomTags']['PatientName']}
-            
-            send_mail(subject, sender, recipients, body_md)
+
+            # Envoi du mail
+            send_mail(subject, sender, recipients, body_md, transaction_id=transaction_id)
                 
         success = True
 
@@ -98,12 +103,14 @@ Patient : {}
         return success
 
 @shared_task
-def STDownloadSerie(api_url, verify_cert, user, password, serie_id, user_email, serie, study, patient):
+def STDownloadSerie(api_url, verify_cert, user, password, serie_id, user_email, serie, study, patient, transaction_id):
 
     # Donnera le résultat de l'opération
     success = False
         
     try:
+        # Log
+        zlog('downloading serie {} for {}'.format(serie_id, user_email), transaction_id)
 
         # Désactive les avertissements du module
         if not verify_cert:
@@ -119,7 +126,7 @@ def STDownloadSerie(api_url, verify_cert, user, password, serie_id, user_email, 
         connection.auth = (user, password)
 
         # Recherche de l'étude
-        REST = '/studies'
+        REST = '/series'
         full_url = api_url + REST + '/' + serie_id + '/archive'
         data = connection.get(full_url, headers=headers, verify=verify_cert, stream=True, timeout=TIMEOUT_GET_REQUEST)
 
@@ -131,6 +138,9 @@ def STDownloadSerie(api_url, verify_cert, user, password, serie_id, user_email, 
             for chunk in data.iter_content(chunk_size=128):
                 fd.write(chunk)
 
+        # Log
+        zlog('serie succefully downloaded', transaction_id)
+
         # Envoi du mail avec le lien de téléchargement
         if user_email is not None:
             subject = '['+ params['app']['name'] + '] - ' + 'Download link'
@@ -140,8 +150,8 @@ def STDownloadSerie(api_url, verify_cert, user, password, serie_id, user_email, 
 
             # A trduire...
             body_md = _('mail serie download pitch %(link)s %(serie_description)s %(study_description)s %(patient)s') % {'link': link, 'serie_description': serie['MainDicomTags']['SeriesDescription'], 'study_description': study['MainDicomTags']['StudyDescription'], 'patient': patient['MainDicomTags']['PatientName']}
-            send_mail(subject, sender, recipients, body_md)
-                
+            send_mail(subject, sender, recipients, body_md, transaction_id=transaction_id)
+
         success = True
 
     except Exception as e:

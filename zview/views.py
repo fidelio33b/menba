@@ -256,8 +256,6 @@ class StudyDownload(LoginRequiredMixin, TemplateView):
 
     template_name = 'view/study_download.html'
 
-    #user = None
-
     # Le serveur orthanc
     orthanc_server = get_orthanc_server()
     o = ORTC(orthanc_server['host'],
@@ -302,6 +300,7 @@ class StudyDownload(LoginRequiredMixin, TemplateView):
 
         # Télécharge l'étude
         if study_id is not None:
+            self.o.SetNewTransactionID()
             self.o.DownloadStudy(study_id, django_user)
         
         # Retourne le contexte
@@ -417,6 +416,7 @@ class SerieDownload(LoginRequiredMixin, TemplateView):
 
         # Télécharge l'étude
         if serie_id is not None:
+            self.o.SetNewTransactionID()
             self.o.DownloadSerie(serie_id, django_user)
         
         # Retourne le contexte

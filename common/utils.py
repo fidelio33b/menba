@@ -40,19 +40,39 @@ def get_orthanc_server():
 
     return orthanc_server
 
+# Log
+def zlog(msg, prefix=None, facility=None):
+
+    # Definit les paramètres
+    ident = params['app']['name']
+    if prefix:
+        msg = prefix + ' - ' + msg
+    if facility == None or facility == 'INFO':
+        facility = syslog.LOG_INFO
+    elif facility == 'WARNING':
+        facility = syslog.LOG_WARNING
+    elif facility == 'ERR':
+        facility = syslog.LOG_ERR
+    else:
+        facility = syslog.LOG_WARNING
+
+    # Positionne syslog
+    syslog.openlog(ident=ident, logoption=syslog.LOG_PID, facility=syslog.LOG_INFO)
+
+    # Log !
+    syslog.syslog(msg)
+
+    # Ferme le log
+    syslog.closelog()    
+
 #
 # Envoi d'un mail
 #
-def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=None, attach=None):
+def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=None, attach=None, transaction_id=None):
 
     succes = False
 
-    unik = str(uuid.uuid4())[:8]
-    
     try:
-
-        # Positionne syslog
-        syslog.openlog(ident='utils/send_mail', logoption=syslog.LOG_PID, facility=syslog.LOG_INFO)
 
         # Génère le corps au format html si nécessaire
         if body_html is None:
@@ -69,34 +89,30 @@ def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=N
 '''
 
         # Double format : texte et html
-        msg = EmailMultiAlternatives(subject, body, sender, recipients, cc=recipients_cc)
-        msg.attach_alternative(body_html, 'text/html')
+        email = EmailMultiAlternatives(subject, body, sender, recipients, cc=recipients_cc)
+        email.attach_alternative(body_html, 'text/html')
         
         # Une pièce jointe ?     
         if attach:
-            msg.attach_file(attach)
+            email.attach_file(attach)
 
         # On log l'envoi
-        syslog.syslog('{} - {} : {} -> {}'.format(unik, _('sending mail'), sender, recipients))
+        zlog('{} : {} -> {}'.format(_('sending mail'), sender, recipients), transaction_id)
 
         # Envoi du mail
-        msg.send()
+        email.send()
 
         # Est-ce ok ?
         success = True
 
         # Log de confirmation
         if success is True:
-            msg = '{} - {}'.format(unik, _('success'))
-            syslog.syslog(syslog.LOG_INFO, msg)
+            msg = '{}'.format(_('success'))
+            zlog(msg, transaction_id)
             
     except Exception as e:
-        msg = '{} - {} - send_mail : {}'.format(unik, _('error'), str(e))
+        msg = '{} - send_mail : {}'.format(_('error'), str(e))
         print(msg)
-        syslog.syslog(syslog.LOG_ERR, msg)
-
-    finally:
-        # Ferme syslog
-        syslog.closelog()
+        zlog(msg, transaction_id, 'ERR')
 
     return success
