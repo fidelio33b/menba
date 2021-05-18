@@ -96,7 +96,7 @@ def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=N
             email.attach_file(attach)
 
         # On log l'envoi
-        zlog('{} : {} -> {}'.format(_('sending mail'), sender, recipients), transaction_id, transaction_user)
+        zlog('sending mail from {} to {}'.format(sender, recipients), transaction_id, transaction_user)
 
         # Envoi du mail
         email.send()
@@ -106,8 +106,7 @@ def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=N
 
         # Log de confirmation
         if success is True:
-            msg = '{}'.format(_('success'))
-            zlog(msg, transaction_id, transaction_user)
+            zlog('success', transaction_id, transaction_user)
             
     except Exception as e:
         msg = 'common/utils.py/send_mail : {}'.str(e)
