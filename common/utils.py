@@ -110,8 +110,7 @@ def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=N
             zlog(msg, transaction_id, transaction_user)
             
     except Exception as e:
-        msg = 'send_mail : {}'.str(e)
-        print(msg)
+        msg = 'common/utils.py/send_mail : {}'.str(e)
         zlog(msg, transaction_id, transaction_user, 'ERR')
 
     return success
