@@ -51,6 +51,7 @@ class ORTC:
     api_url = None
     verify_cert = False
     transaction_id = None
+    transaction_user = None
 
     #                      _                   _                  
     #   ___ ___  _ __  ___| |_ _ __ _   _  ___| |_ ___ _   _ _ __ 
@@ -59,14 +60,15 @@ class ORTC:
     #  \___\___/|_| |_|___/\__|_|   \__,_|\___|\__\___|\__,_|_|   
     #
     
-    def __init__(self, host, port, user, password, verify_cert=False):
+    def __init__(self, host, port, user, password, transaction_id=None, transaction_user=None, verify_cert=False):
         self.host = host
         self.port = port
         self.user = user
         self.password = password
         self.api_url = 'http://{}:{}'.format(self.host, self.port)
         self.verify_cert = verify_cert
-        self.SetNewTransactionID()
+        self.SetTransactionID(transaction_id)
+        self.SetTransactionUser(transaction_user)
 
     #                 _   _               _           
     #  _ __ ___   ___| |_| |__   ___   __| | ___  ___ 
@@ -75,9 +77,28 @@ class ORTC:
     # |_| |_| |_|\___|\__|_| |_|\___/ \__,_|\___||___/
     #
 
-    # Génère un nouveau numéro de transaction
+    # Génère un nouveau numéro de transaction (utile dans les logs p.ex.)
     def SetNewTransactionID(self):
         self.transaction_id = str(uuid.uuid4())[:8]
+
+    # Positionne le numéro de transaction (utile dans les logs p.ex.)
+    def SetTransactionID(self, transaction_id):
+        if transaction_id is None:
+            self.SetNewTransactionID()
+        else:
+            self.transaction_id = transaction_id
+            
+    # Récupère le numéro de transaction (utile dans les logs p.ex.)
+    def GetTransactionID(self):
+        return self.transaction_id
+
+    # Positionne le username pour la traçabilité notamment dans syslog
+    def SetTransactionUser(self, transaction_user=None):
+        self.transaction_user = transaction_user
+
+    # Récupère le username pour la traçabilité notamment dans syslog
+    def GetTransactionUser(self):
+        return self.transaction_user
 
     # Récupère les patients
     def GetPatients(self):
@@ -409,7 +430,7 @@ class ORTC:
                 patient = self.GetPatient(study['ParentPatient'])
 
             # Lance en // la tâche de récupération de l'étude
-            success = STDownloadStudy.delay(self.api_url, self.verify_cert, self.user, self.password, study_id, django_user.email, study, patient, self.transaction_id)
+            success = STDownloadStudy.delay(self.api_url, self.verify_cert, self.user, self.password, study_id, django_user.email, study, patient, self.transaction_id, self.transaction_user)
             
         except Exception as e:
             print('common/ortc.py/DownloadStudy')
@@ -439,7 +460,7 @@ class ORTC:
                     patient = self.GetPatient(study['ParentPatient'])
 
             # Lance en // la tâche de récupération de l'étude
-            success = STDownloadSerie.delay(self.api_url, self.verify_cert, self.user, self.password, serie_id, django_user.email, serie, study, patient, self.transaction_id)
+            success = STDownloadSerie.delay(self.api_url, self.verify_cert, self.user, self.password, serie_id, django_user.email, serie, study, patient, self.transaction_id, self.transaction_user)
             
         except Exception as e:
             print('common/ortc.py/DownloadSerie')

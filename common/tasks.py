@@ -33,14 +33,14 @@ from common.utils import send_mail, zlog
 TIMEOUT_GET_REQUEST=(2, 120)
 
 @shared_task
-def STDownloadStudy(api_url, verify_cert, user, password, study_id, user_email, study, patient, transaction_id):
+def STDownloadStudy(api_url, verify_cert, user, password, study_id, user_email, study, patient, transaction_id, transaction_user):
 
     # Donnera le résultat de l'opération
     success = False
         
     try:
         # Log
-        zlog('downloading study {} for {}'.format(study_id, user_email), transaction_id)
+        zlog('downloading study {}'.format(study_id), transaction_id, transaction_user)
 
         # Désactive les avertissements du module
         if not verify_cert:
@@ -69,7 +69,7 @@ def STDownloadStudy(api_url, verify_cert, user, password, study_id, user_email, 
                 fd.write(chunk)
 
         # Log
-        zlog('study succesfully downloaded', transaction_id)
+        zlog('study succesfully downloaded', transaction_id, transaction_user)
 
         # Envoi du mail avec le lien de téléchargement
         if user_email is not None:
@@ -91,7 +91,7 @@ Patient : {}
             body_md = _('mail study download pitch %(link)s %(study_description)s %(patient)s') % {'link': link, 'study_description': study['MainDicomTags']['StudyDescription'], 'patient': patient['MainDicomTags']['PatientName']}
 
             # Envoi du mail
-            send_mail(subject, sender, recipients, body_md, transaction_id=transaction_id)
+            send_mail(subject, sender, recipients, body_md, transaction_id=transaction_id, transaction_user=transaction_user)
                 
         success = True
 
@@ -103,14 +103,14 @@ Patient : {}
         return success
 
 @shared_task
-def STDownloadSerie(api_url, verify_cert, user, password, serie_id, user_email, serie, study, patient, transaction_id):
+def STDownloadSerie(api_url, verify_cert, user, password, serie_id, user_email, serie, study, patient, transaction_id, transaction_user):
 
     # Donnera le résultat de l'opération
     success = False
         
     try:
         # Log
-        zlog('downloading serie {} for {}'.format(serie_id, user_email), transaction_id)
+        zlog('downloading serie {}'.format(serie_id), transaction_id, transaction_user)
 
         # Désactive les avertissements du module
         if not verify_cert:
@@ -139,7 +139,7 @@ def STDownloadSerie(api_url, verify_cert, user, password, serie_id, user_email, 
                 fd.write(chunk)
 
         # Log
-        zlog('serie succefully downloaded', transaction_id)
+        zlog('serie succefully downloaded', transaction_id, transaction_user)
 
         # Envoi du mail avec le lien de téléchargement
         if user_email is not None:
@@ -150,7 +150,7 @@ def STDownloadSerie(api_url, verify_cert, user, password, serie_id, user_email, 
 
             # A trduire...
             body_md = _('mail serie download pitch %(link)s %(serie_description)s %(study_description)s %(patient)s') % {'link': link, 'serie_description': serie['MainDicomTags']['SeriesDescription'], 'study_description': study['MainDicomTags']['StudyDescription'], 'patient': patient['MainDicomTags']['PatientName']}
-            send_mail(subject, sender, recipients, body_md, transaction_id=transaction_id)
+            send_mail(subject, sender, recipients, body_md, transaction_id=transaction_id, transaction_user=transaction_user)
 
         success = True
 

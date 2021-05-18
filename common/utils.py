@@ -41,12 +41,11 @@ def get_orthanc_server():
     return orthanc_server
 
 # Log
-def zlog(msg, prefix=None, facility=None):
+def zlog(msg, prefix=None, transaction_user=None, facility=None):
 
     # Definit les paramètres
     ident = params['app']['name']
-    if prefix:
-        msg = prefix + ' - ' + msg
+    msg = '[{}] ({}) {}'.format(prefix, transaction_user, msg)
     if facility == None or facility == 'INFO':
         facility = syslog.LOG_INFO
     elif facility == 'WARNING':
@@ -68,7 +67,7 @@ def zlog(msg, prefix=None, facility=None):
 #
 # Envoi d'un mail
 #
-def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=None, attach=None, transaction_id=None):
+def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=None, attach=None, transaction_id=None, transaction_user=None):
 
     succes = False
 
@@ -97,7 +96,7 @@ def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=N
             email.attach_file(attach)
 
         # On log l'envoi
-        zlog('{} : {} -> {}'.format(_('sending mail'), sender, recipients), transaction_id)
+        zlog('{} : {} -> {}'.format(_('sending mail'), sender, recipients), transaction_id, transaction_user)
 
         # Envoi du mail
         email.send()
@@ -108,11 +107,11 @@ def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=N
         # Log de confirmation
         if success is True:
             msg = '{}'.format(_('success'))
-            zlog(msg, transaction_id)
+            zlog(msg, transaction_id, transaction_user)
             
     except Exception as e:
-        msg = '{} - send_mail : {}'.format(_('error'), str(e))
+        msg = 'send_mail : {}'.str(e)
         print(msg)
-        zlog(msg, transaction_id, 'ERR')
+        zlog(msg, transaction_id, transaction_user, 'ERR')
 
     return success

@@ -301,6 +301,7 @@ class StudyDownload(LoginRequiredMixin, TemplateView):
         # Télécharge l'étude
         if study_id is not None:
             self.o.SetNewTransactionID()
+            self.o.SetTransactionUser(django_user.username)
             self.o.DownloadStudy(study_id, django_user)
         
         # Retourne le contexte
@@ -414,9 +415,10 @@ class SerieDownload(LoginRequiredMixin, TemplateView):
         else:
             context['ref'] = None
 
-        # Télécharge l'étude
+        # Télécharge la série
         if serie_id is not None:
             self.o.SetNewTransactionID()
+            self.o.SetTransactionUser(django_user.username)
             self.o.DownloadSerie(serie_id, django_user)
         
         # Retourne le contexte
