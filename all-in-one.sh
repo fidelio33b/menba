@@ -462,14 +462,8 @@ params = {
         'url': '${ORTHANC_PROTOCOL}://${ORTHANC_HOST}:${ORTHANC_PORT}/web-viewer/app/viewer.html?series=',
     },
     'files': {
-        'directory': {
-            'studies' : '/var/lib/menba/files/studies',
-            'series' :  '/var/lib/menba/files/series',
-        },
-        'link': {
-            'studies' : 'http://${HOST}/files/studies',
-            'series' :  'http://${HOST}/files/series',
-        },
+        'directory': '/var/lib/menba/files',
+        'link': 'http://${HOST}/files',
     },
     'mail': {
         'sender': '$EMAIL_HOST_USER',
