@@ -33,7 +33,7 @@ from common.utils import send_mail, zlog
 TIMEOUT_GET_REQUEST=(2, 120)
 
 @shared_task
-def STDownloadStudy(api_url, verify_cert, user, password, study_id, user_email, study, patient, transaction_id, transaction_user):
+def STDownloadStudy(api_url, verify_cert, orthanc_user, orthanc_password, study_id, user_email, study, patient, transaction_id, transaction_user):
 
     # Donnera le résultat de l'opération
     success = False
@@ -53,7 +53,7 @@ def STDownloadStudy(api_url, verify_cert, user, password, study_id, user_email, 
 
         # Définit la session de connexion
         connection = requests.Session()
-        connection.auth = (user, password)
+        connection.auth = (orthanc_user, orthanc_password)
 
         # Recherche de l'étude
         REST = '/studies'
@@ -103,7 +103,7 @@ Patient : {}
         return success
 
 @shared_task
-def STDownloadSerie(api_url, verify_cert, user, password, serie_id, user_email, serie, study, patient, transaction_id, transaction_user):
+def STDownloadSerie(api_url, verify_cert, orthanc_user, orthanc_password, serie_id, user_email, serie, study, patient, transaction_id, transaction_user):
 
     # Donnera le résultat de l'opération
     success = False
@@ -123,7 +123,7 @@ def STDownloadSerie(api_url, verify_cert, user, password, serie_id, user_email, 
 
         # Définit la session de connexion
         connection = requests.Session()
-        connection.auth = (user, password)
+        connection.auth = (orthanc_user, orthanc_password)
 
         # Recherche de l'étude
         REST = '/series'
