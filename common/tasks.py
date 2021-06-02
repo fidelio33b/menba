@@ -19,6 +19,7 @@ Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 """
 
 import requests
+import os
 
 from django.utils.translation import gettext as _
 
@@ -61,10 +62,14 @@ def STDownloadStudy(api_url, verify_cert, orthanc_user, orthanc_password, study_
         data = connection.get(full_url, headers=headers, verify=verify_cert, stream=True, timeout=TIMEOUT_GET_REQUEST)
 
         # Stockage du flux archive dans un fichier
-        directory = params['files']['directory']['studies']
-        filename = directory + '/' + study_id + '.zip'
-        link = params['files']['link']['studies'] + '/' + study_id + '.zip'
-        with open(filename, 'wb') as fd:
+        directory = params['files']['directory'] + '/' + transaction_user + '/studies'
+        if not os.path.exists(directory):
+            zlog('--> creating directory {}'.format(directory), transaction_id, transaction_user)
+            os.makedirs(directory)
+        filename = study_id + '.zip'
+        fullpath = directory + '/' + filename
+        link = params['files']['link'] + '/' + transaction_user + '/studies/' + filename
+        with open(fullpath, 'wb') as fd:
             for chunk in data.iter_content(chunk_size=128):
                 fd.write(chunk)
 
@@ -131,10 +136,14 @@ def STDownloadSerie(api_url, verify_cert, orthanc_user, orthanc_password, serie_
         data = connection.get(full_url, headers=headers, verify=verify_cert, stream=True, timeout=TIMEOUT_GET_REQUEST)
 
         # Stockage du flux archive dans un fichier
-        directory = params['files']['directory']['series']
-        filename = directory + '/' + serie_id + '.zip'
-        link = params['files']['link']['series'] + '/' + serie_id + '.zip'
-        with open(filename, 'wb') as fd:
+        directory = params['files']['directory'] + '/' + transaction_user + '/series'
+        if not os.path.exists(directory):
+            zlog('--> creating directory {}'.format(directory), transaction_id, transaction_user)
+            os.makedirs(directory)
+        filename = serie_id + '.zip'
+        fullpath = directory + '/' + filename
+        link = params['files']['link'] + '/' + transaction_user + '/series/' + filename
+        with open(fullpath, 'wb') as fd:
             for chunk in data.iter_content(chunk_size=128):
                 fd.write(chunk)
 
