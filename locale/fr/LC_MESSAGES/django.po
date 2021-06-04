@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-18 13:42+0200\n"
+"POT-Creation-Date: 2021-06-04 13:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Laurent Lavaud <fidelio33b@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,11 +31,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: common/tasks.py:91
+#: common/tasks.py:96
 #, python-format
 msgid "mail study download pitch %(link)s %(study_description)s %(patient)s"
 msgstr ""
-"# Download serie\n"
+"# Download study\n"
 "\n"
 "[Download link](%(link)s)\n"
 "\n"
@@ -43,7 +43,7 @@ msgstr ""
 "\n"
 "Patient : %(patient)s"
 
-#: common/tasks.py:152
+#: common/tasks.py:161
 #, python-format
 msgid ""
 "mail serie download pitch %(link)s %(serie_description)s "
