@@ -206,7 +206,7 @@ function install_menba {
     figlet "menba"
 
     # Create download repository
-    mkdir -p /var/lib/menba/files/{studies,series}
+    mkdir -p /var/lib/menba/files
     chown -R menba:menba /var/lib/menba
 
     # Get code
