@@ -37,9 +37,6 @@
               <li class="nav-item">
 		<a class="nav-link" href="{%url 'zsearch:index' %}">{% translate "search"|capfirst %}</a>
               </li>
-              <li class="nav-item">
-		<a class="nav-link" href="{%url 'zstats:index' %}">{% translate "statistics"|capfirst %}</a>
-              </li>
             </ul>
 	  </div>
 	</div>
@@ -70,6 +67,7 @@
 	    <h5>{%translate "about"|capfirst %}</h5>
 	    <ul class="list-unstyled text-small">
 	      <li><a class="s1" href="https://github.com/fidelio33b/menba" target="_blank">GitHub</a></li>
+	      <li><a class="s1" href="{%url 'zstats:index' %}">{%translate "infos"|capfirst %}</a></li>
 	    </ul>
 	  </div>
 	</div>
