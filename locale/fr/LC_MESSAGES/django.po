@@ -1310,7 +1310,7 @@ msgstr "à propos"
 
 #: zhome/templates/zhome/base.html:80 zinfos/templates/zinfos/index.html:14
 msgid "infos"
-msgstr "informations"
+msgstr "informatio
 
 #: zhome/templates/zhome/index.html:5 zhome/templates/zhome/index.html:13
 #: zinfos/templates/zinfos/index.html:13
