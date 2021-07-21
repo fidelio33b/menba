@@ -34,5 +34,5 @@ urlpatterns = [
     path('search/', include('zsearch.urls')),
 
     # Les informations (serveur, statistiques...)
-    path('statistics/', include('zinfos.urls')),
+    path('infos/', include('zinfos.urls')),
 ]
