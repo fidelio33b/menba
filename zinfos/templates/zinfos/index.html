@@ -1,0 +1,78 @@
+{%extends "zhome/base.html" %}
+{%load i18n %}
+{%load static %}
+
+{%block title %}{%translate "statistics"|capfirst %}{%endblock title %}
+
+{%block base_body %}
+
+<!-- breadcrumb -->
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="shadow breadcrumb bg-light">
+            <li class="breadcrumb-item active"><a class="s1" href="{%url 'zhome:index' %}">{%translate "home"|capfirst %}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{%translate "infos"|capfirst %}</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container">
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-sm-6">
+            <div class="shadow card">
+                <h5 class="card-header">{%translate "statistics"|capfirst %}</h5>
+                <div class="card-body">
+
+                    {%if stats %}
+                    <table class="table table-hover table-sm table-borderless">
+                        <tbody>
+                        <tr class="text-secondary">
+                            <th scope="row" width="40%">{%translate "orthanc server"|capfirst %}</th>
+                            <td>{%if orthanc_name %}{{ orthanc_name }}{%else %}{%translate "not available"|capfirst %}{%endif %}
+                            </td>
+                        </tr>
+                        <tr class="text-secondary">
+                            <th scope="row" width="40%">{%translate "instances"|capfirst %}</th>
+                            <td>{%if stats.CountInstances %}{{ stats.CountInstances }}{%else %}{%translate "not
+                                available"|capfirst %}{%endif %}
+                            </td>
+                        </tr>
+                        <tr class="text-secondary">
+                            <th scope="row" width="40%">{%translate "patients"|capfirst %}</th>
+                            <td>{%if stats.CountPatients %}{{ stats.CountPatients }}{%else %}{%translate "not
+                                available"|capfirst %}{%endif %}
+                            </td>
+                        </tr>
+                        <tr class="text-secondary">
+                            <th scope="row" width="40%">{%translate "series"|capfirst %}</th>
+                            <td>{%if stats.CountSeries %}{{ stats.CountSeries }}{%else %}{%translate "not
+                                available"|capfirst %}{%endif %}
+                            </td>
+                        </tr>
+                        <tr class="text-secondary">
+                            <th scope="row" width="40%">{%translate "studies"|capfirst %}</th>
+                            <td>{%if stats.CountStudies %}{{ stats.CountStudies }}{%else %}{%translate "not
+                                available"|capfirst %}{%endif %}
+                            </td>
+                        </tr>
+                        <tr class="text-secondary">
+                            <th scope="row" width="40%">{%translate "disk size"|capfirst %}</th>
+                            <td>{%if stats.TotalDiskSize %}{{ stats.TotalDiskSize|filesizeformat }}{%else %}{%translate "not available"|capfirst %}{%endif %}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    {%else %}
+                    {%translate "no statistics"|capfirst %}
+                    {%endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock base_body %}
