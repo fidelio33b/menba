@@ -33,6 +33,6 @@ urlpatterns = [
     # Les recherches
     path('search/', include('zsearch.urls')),
 
-    # Les statistiques
-    path('statistics/', include('zstats.urls')),
+    # Les informations (serveur, statistiques...)
+    path('statistics/', include('zinfos.urls')),
 ]

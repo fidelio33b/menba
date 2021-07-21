@@ -18,4 +18,4 @@ def index(request):
     )
     stats = o.GetStatistics()
 
-    return render(request, 'zstats/index.html', {'orthanc_name': orthanc_server['name'], 'stats': stats,})
+    return render(request, 'zinfos/index.html', {'orthanc_name': orthanc_server['name'], 'stats': stats,})
