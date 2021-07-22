@@ -31,7 +31,7 @@ function install_base {
     # python modules
     pip3 install markdown2
 
-    # Create menba user
+    # Create menba group and user
     groupadd menba
     useradd -g menba -m -s /bin/bash menba
 }
@@ -112,7 +112,7 @@ function install_apache {
     Require valid-user
   </Location>
 
-  <Location "/statistics">
+  <Location "/infos">
     Order Deny,Allow
     AuthType Basic
     AuthName "Restricted Content"
@@ -148,13 +148,14 @@ function install_django {
     figlet "django"
     
     # Packages
-    pip3 install Django==3.2.1
+    pip3 install Django
 }
 
 function install_rabbitmq {
 
     figlet "rabbitmq"
 
+    # Packages
     apt-get install curl gnupg debian-keyring debian-archive-keyring apt-transport-https -y
 
     ## Team RabbitMQ's main signing key
@@ -266,7 +267,7 @@ INSTALLED_APPS = [
     'zhome.apps.ZHomeConfig',
     'zview.apps.ZViewConfig',
     'zsearch.apps.ZSearchConfig',
-    'zstats.apps.ZStatsConfig',
+    'zinfos.apps.ZInfosConfig',
 ]
 
 MIDDLEWARE = [
@@ -563,6 +564,7 @@ function intro {
     echo "!!!"
 }
 
+# Defailt parameters
 DISTRO=focal
 HOST=192.168.0.1
 MAIN_PASSWORD=
