@@ -11,7 +11,7 @@
     <nav aria-label="breadcrumb">
         <ol class="shadow breadcrumb bg-light">
             <li class="breadcrumb-item active"><a class="s1" href="{%url 'zhome:index' %}">{%translate "home"|capfirst %}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{%translate "infos"|capfirst %}</li>
+            <li class="breadcrumb-item active" aria-current="page">{%translate "informations"|capfirst %}</li>
         </ol>
     </nav>
 </div>
@@ -24,15 +24,16 @@
 
         <div class="col-sm-6">
             <div class="shadow card">
-                <h5 class="card-header">{%translate "statistics"|capfirst %}</h5>
+                <h5 class="card-header">Orthanc</h5>
                 <div class="card-body">
 
                     {%if stats %}
                     <table class="table table-hover table-sm table-borderless">
                         <tbody>
                         <tr class="text-secondary">
-                            <th scope="row" width="40%">{%translate "orthanc server"|capfirst %}</th>
-                            <td>{%if orthanc_name %}{{ orthanc_name }}{%else %}{%translate "not available"|capfirst %}{%endif %}
+                            <th scope="row" width="40%">{%translate "server"|capfirst %}</th>
+                            <td>{%if orthanc_name %}{{ orthanc_name }}{%else %}{%translate "not available"|capfirst
+                                %}{%endif %}
                             </td>
                         </tr>
                         <tr class="text-secondary">
@@ -61,7 +62,8 @@
                         </tr>
                         <tr class="text-secondary">
                             <th scope="row" width="40%">{%translate "disk size"|capfirst %}</th>
-                            <td>{%if stats.TotalDiskSize %}{{ stats.TotalDiskSize|filesizeformat }}{%else %}{%translate "not available"|capfirst %}{%endif %}
+                            <td>{%if stats.TotalDiskSize %}{{ stats.TotalDiskSize|filesizeformat }}{%else %}{%translate
+                                "not available"|capfirst %}{%endif %}
                             </td>
                         </tr>
                         </tbody>

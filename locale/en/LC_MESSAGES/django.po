@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-21 17:14+0200\n"
+"POT-Creation-Date: 2021-07-22 08:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Laurent Lavaud <fidelio33b@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1330,62 +1330,41 @@ msgstr "Easily browse and export orthanc PACS data !"
 msgid "pitch line"
 msgstr "Explore and export orthanc PACS data in a simple way."
 
-#: zinfos/templates/zinfos/index.html:5 zinfos/templates/zinfos/index.html:27
+#: zinfos/templates/zinfos/index.html:5
 msgid "statistics"
 msgstr "statistics"
 
 #: zinfos/templates/zinfos/index.html:34
-msgid "orthanc server"
+#, fuzzy
+#| msgid "orthanc server"
+msgid "server"
 msgstr "orthanc server"
 
-#: zinfos/templates/zinfos/index.html:35 zinfos/templates/zinfos/index.html:64
-#: zview/templates/view/patient.html:39 zview/templates/view/patient.html:43
-#: zview/templates/view/patient.html:47 zview/templates/view/patient.html:51
-#: zview/templates/view/patient.html:114 zview/templates/view/patient.html:115
-#: zview/templates/view/patient.html:116 zview/templates/view/patient.html:117
-#: zview/templates/view/patient.html:118 zview/templates/view/patient.html:119
-#: zview/templates/view/patients.html:79 zview/templates/view/patients.html:81
-#: zview/templates/view/patients.html:82 zview/templates/view/serie.html:43
-#: zview/templates/view/serie.html:47
-#: zview/templates/view/serie_download.html:43
-#: zview/templates/view/serie_download.html:47
-#: zview/templates/view/studies.html:78 zview/templates/view/studies.html:79
-#: zview/templates/view/studies.html:80 zview/templates/view/studies.html:81
-#: zview/templates/view/studies.html:82 zview/templates/view/study.html:41
-#: zview/templates/view/study.html:45 zview/templates/view/study.html:110
-#: zview/templates/view/study.html:112 zview/templates/view/study.html:113
-#: zview/templates/view/study.html:114 zview/templates/view/study.html:115
-#: zview/templates/view/study.html:116 zview/templates/view/study.html:117
-#: zview/templates/view/study_download.html:42
-#: zview/templates/view/study_download.html:46
-msgid "not available"
-msgstr "not available"
-
-#: zinfos/templates/zinfos/index.html:39
+#: zinfos/templates/zinfos/index.html:40
 msgid "instances"
 msgstr "instances"
 
-#: zinfos/templates/zinfos/index.html:45
+#: zinfos/templates/zinfos/index.html:46
 #: zsearch/templates/zsearch/index.html:27
 #: zview/templates/view/patients.html:33
 msgid "patients"
 msgstr "patients"
 
-#: zinfos/templates/zinfos/index.html:51 zview/templates/view/study.html:61
+#: zinfos/templates/zinfos/index.html:52 zview/templates/view/study.html:61
 msgid "series"
 msgstr "series"
 
-#: zinfos/templates/zinfos/index.html:57
+#: zinfos/templates/zinfos/index.html:58
 #: zsearch/templates/zsearch/index.html:71 zview/templates/view/patient.html:67
 #: zview/templates/view/studies.html:5 zview/templates/view/studies.html:29
 msgid "studies"
 msgstr "studies"
 
-#: zinfos/templates/zinfos/index.html:63
+#: zinfos/templates/zinfos/index.html:64
 msgid "disk size"
 msgstr "disk size"
 
-#: zinfos/templates/zinfos/index.html:70
+#: zinfos/templates/zinfos/index.html:72
 msgid "no statistics"
 msgstr "no statistics"
 
@@ -1416,6 +1395,28 @@ msgstr "results"
 #: zview/templates/view/patient.html:38 zview/templates/view/patients.html:70
 msgid "name"
 msgstr "name"
+
+#: zview/templates/view/patient.html:39 zview/templates/view/patient.html:43
+#: zview/templates/view/patient.html:47 zview/templates/view/patient.html:51
+#: zview/templates/view/patient.html:114 zview/templates/view/patient.html:115
+#: zview/templates/view/patient.html:116 zview/templates/view/patient.html:117
+#: zview/templates/view/patient.html:118 zview/templates/view/patient.html:119
+#: zview/templates/view/patients.html:79 zview/templates/view/patients.html:81
+#: zview/templates/view/patients.html:82 zview/templates/view/serie.html:43
+#: zview/templates/view/serie.html:47
+#: zview/templates/view/serie_download.html:43
+#: zview/templates/view/serie_download.html:47
+#: zview/templates/view/studies.html:78 zview/templates/view/studies.html:79
+#: zview/templates/view/studies.html:80 zview/templates/view/studies.html:81
+#: zview/templates/view/studies.html:82 zview/templates/view/study.html:41
+#: zview/templates/view/study.html:45 zview/templates/view/study.html:110
+#: zview/templates/view/study.html:112 zview/templates/view/study.html:113
+#: zview/templates/view/study.html:114 zview/templates/view/study.html:115
+#: zview/templates/view/study.html:116 zview/templates/view/study.html:117
+#: zview/templates/view/study_download.html:42
+#: zview/templates/view/study_download.html:46
+msgid "not available"
+msgstr "not available"
 
 #: zview/templates/view/patient.html:42 zview/templates/view/patients.html:72
 msgid "birthdate"
