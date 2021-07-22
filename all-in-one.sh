@@ -564,7 +564,7 @@ function intro {
     echo "!!!"
 }
 
-# Defailt parameters
+# Default parameter
 DISTRO=focal
 HOST=192.168.0.1
 MAIN_PASSWORD=
