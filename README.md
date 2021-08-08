@@ -54,7 +54,7 @@ Menba code is licenced under [GPLv3+](https://www.gnu.org/licenses/gpl-3.0.en.ht
 
 ## More screenshots
 
-### Fisrt level of data browsing
+### First level of data browsing
 
 ![](./screenshots/Menba.02.jpg)
 
@@ -74,6 +74,6 @@ Menba code is licenced under [GPLv3+](https://www.gnu.org/licenses/gpl-3.0.en.ht
 
 ![](./screenshots/Menba.06.jpg)
 
-### Recieved email to download an archive serie
+### Received email to download an archive series
 
 ![](./screenshots/Menba.07.jpg)
