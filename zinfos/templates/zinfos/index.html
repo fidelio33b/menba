@@ -2,7 +2,7 @@
 {%load i18n %}
 {%load static %}
 
-{%block title %}{%translate "statistics"|capfirst %}{%endblock title %}
+{%block title %}{%translate "informations"|capfirst %}{%endblock title %}
 
 {%block base_body %}
 
@@ -36,6 +36,14 @@
                                 %}{%endif %}
                             </td>
                         </tr>
+                        {% if infos %}
+                            <tr class="text-secondary">
+                            <th scope="row" width="40%">{%translate "version"|capfirst %}</th>
+                            <td>{%if infos.Version %}{{ infos.Version }}{%else %}{%translate "not available"|capfirst
+                                %}{%endif %}
+                            </td>
+                        </tr>
+                        {% endif %}
                         <tr class="text-secondary">
                             <th scope="row" width="40%">{%translate "instances"|capfirst %}</th>
                             <td>{%if stats.CountInstances %}{{ stats.CountInstances }}{%else %}{%translate "not

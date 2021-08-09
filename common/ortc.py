@@ -352,14 +352,14 @@ class ORTC:
             connection = requests.Session()
             connection.auth = (self.user, self.password)
 
-            # Recherche de la série
+            # Recherche des statistiques
             REST = '/statistics'
             full_url = self.api_url + REST
             data = connection.get(full_url, headers=headers, verify=self.verify_cert, timeout=TIMEOUT_GET_REQUEST)
-            stats_details = json.loads(data.text)
+            formatted_data = json.loads(data.text)
 
             # Stocke les données
-            stats = stats_details
+            stats = formatted_data
 
         except Exception as e:
             print('oops')
@@ -367,6 +367,43 @@ class ORTC:
 
         finally:
             return stats
+
+    # Récupère les informations concernant le serveur
+    def GetSystemInfos(self):
+
+        # Pour stocker les données
+        infos = None
+
+        try:
+
+            # Désactive les avertissements du module
+            if not self.verify_cert:
+                requests.packages.urllib3.disable_warnings()
+
+            # Définit les en-têtes http
+            headers = {}
+            headers['Content-Type'] = 'application/json; charset=utf-8'
+            headers['Accept'] = 'application/json'
+
+            # Définit la session de connexion
+            connection = requests.Session()
+            connection.auth = (self.user, self.password)
+
+            # Recherche des informations
+            REST = '/system'
+            full_url = self.api_url + REST
+            data = connection.get(full_url, headers=headers, verify=self.verify_cert, timeout=TIMEOUT_GET_REQUEST)
+            formatted_data = json.loads(data.text)
+
+            # Stocke les données
+            infos = formatted_data
+
+        except Exception as e:
+            print('oops')
+            print(str(e))
+
+        finally:
+            return infos
 
     # Recherches
     def Search(self, payload):

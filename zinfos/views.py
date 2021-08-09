@@ -8,7 +8,7 @@ from common.utils import get_orthanc_server
 def index(request):
     stats = None
 
-    # Récupère les statistiques
+    # Récupère les statistiques et les informations système du serveur
     orthanc_server = get_orthanc_server()
     o = ORTC(
         orthanc_server['host'],
@@ -17,5 +17,7 @@ def index(request):
         orthanc_server['password'],
     )
     stats = o.GetStatistics()
+    infos = o.GetSystemInfos()
 
-    return render(request, 'zinfos/index.html', {'orthanc_name': orthanc_server['name'], 'stats': stats})
+    return render(request, 'zinfos/index.html',
+                  {'orthanc_name': orthanc_server['name'], 'stats': stats, 'infos': infos})
