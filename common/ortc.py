@@ -18,17 +18,19 @@ along with Menba.  If not, see <https://www.gnu.org/licenses/>.
 Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 """
 
-import requests
 import json
 import uuid
+
+import requests
 
 from common.tasks import STDownloadStudy, STDownloadSerie
 
 # Timeout for to stop requests waiting for a response after a given number of seconds
 #   - https://docs.python-requests.org/en/latest/user/quickstart/#timeouts
-TIMEOUT_GET_REQUEST=(2, 120)
+TIMEOUT_GET_REQUEST = (2, 120)
 
-#       _                    
+
+#       _
 #   ___| | __ _ ___ ___  ___ 
 #  / __| |/ _` / __/ __|/ _ \
 # | (__| | (_| \__ \__ \  __/
@@ -36,14 +38,13 @@ TIMEOUT_GET_REQUEST=(2, 120)
 #                            
 
 class ORTC:
-
-    #                                       _                 
+    #                                       _
     #  _ __   __ _ _ __ __ _ _ __ ___   ___| |_ _ __ ___  ___ 
     # | '_ \ / _` | '__/ _` | '_ ` _ \ / _ \ __| '__/ _ \/ __|
     # | |_) | (_| | | | (_| | | | | | |  __/ |_| | |  __/\__ \
     # | .__/ \__,_|_|  \__,_|_| |_| |_|\___|\__|_|  \___||___/
     # |_|
-    
+
     host = None
     port = 8042
     user = None
@@ -59,7 +60,7 @@ class ORTC:
     # | (_| (_) | | | \__ \ |_| |  | |_| | (__| ||  __/ |_| | |   
     #  \___\___/|_| |_|___/\__|_|   \__,_|\___|\__\___|\__,_|_|   
     #
-    
+
     def __init__(self, host, port, user, password, transaction_id=None, transaction_user=None, verify_cert=False):
         self.host = host
         self.port = port
@@ -87,7 +88,7 @@ class ORTC:
             self.SetNewTransactionID()
         else:
             self.transaction_id = transaction_id
-            
+
     # Récupère le numéro de transaction (utile dans les logs p.ex.)
     def GetTransactionID(self):
         return self.transaction_id
@@ -126,10 +127,10 @@ class ORTC:
             full_url = self.api_url + REST
             data = connection.get(full_url, headers=headers, verify=self.verify_cert, timeout=TIMEOUT_GET_REQUEST)
             patients_list = json.loads(data.text)
-            
+
             # Stocke les données
             patients = []
-            
+
             # Parcours des patients pour obtenir les détails
             for patient_id in patients_list:
 
@@ -150,7 +151,7 @@ class ORTC:
 
         # Pour stocker les données
         patient = None
-        
+
         try:
 
             # Désactive les avertissements du module
@@ -187,7 +188,7 @@ class ORTC:
 
         # Pour stocker les données
         study = None
-        
+
         try:
 
             # Désactive les avertissements du module
@@ -211,7 +212,7 @@ class ORTC:
 
             # Stocke certaines données
             study = study_details
-            
+
         except Exception as e:
             print('oops')
             print(str(e))
@@ -224,7 +225,7 @@ class ORTC:
 
         # Pour stocker les données
         studies = None
-        
+
         try:
 
             # Désactive les avertissements du module
@@ -238,15 +239,14 @@ class ORTC:
 
                 # Stocke les données
                 studies = []
-            
+
                 # Parcours des numéros d'études du patient
                 for study_id in patient['Studies']:
 
                     # Récupère l'étude
                     study = self.GetStudy(study_id)
-                    
+
                     if study:
-                        
                         # Stocke les données
                         studies.append(study)
 
@@ -262,7 +262,7 @@ class ORTC:
 
         # Pour stocker les données
         serie = None
-        
+
         try:
 
             # Désactive les avertissements du module
@@ -286,7 +286,7 @@ class ORTC:
 
             # Stocke certaines données
             serie = serie_details
-            
+
         except Exception as e:
             print('oops')
             print(str(e))
@@ -299,7 +299,7 @@ class ORTC:
 
         # Pour stocker les données
         series = None
-        
+
         try:
 
             # Désactive les avertissements du module
@@ -313,15 +313,14 @@ class ORTC:
 
                 # Stocke les données
                 series = []
-            
+
                 # Parcours des numéros des séries de l'étude
                 for serie_id in study['Series']:
 
                     # Récupère la série
                     serie = self.GetSerie(serie_id)
-                    
+
                     if serie:
-                        
                         # Stocke les données
                         series.append(serie)
 
@@ -337,7 +336,7 @@ class ORTC:
 
         # Pour stocker les données
         stats = None
-        
+
         try:
 
             # Désactive les avertissements du module
@@ -399,7 +398,8 @@ class ORTC:
             # Recherche
             REST = '/tools/find'
             full_url = self.api_url + REST
-            data = connection.post(full_url, data=json.dumps(payload, ensure_ascii=False).encode('utf-8'), headers=headers, verify=self.verify_cert, timeout=TIMEOUT_GET_REQUEST)
+            data = connection.post(full_url, data=json.dumps(payload, ensure_ascii=False).encode('utf-8'),
+                                   headers=headers, verify=self.verify_cert, timeout=TIMEOUT_GET_REQUEST)
             results_details = json.loads(data.text)
 
             # Stocke les données
@@ -417,7 +417,7 @@ class ORTC:
 
         # Donnera le résultat de l'opération
         success = False
-        
+
         try:
 
             # Des détails
@@ -430,8 +430,10 @@ class ORTC:
                 patient = self.GetPatient(study['ParentPatient'])
 
             # Lance en // la tâche de récupération de l'étude
-            success = STDownloadStudy.delay(self.api_url, self.verify_cert, self.user, self.password, study_id, django_user.email, study, patient, self.transaction_id, self.transaction_user)
-            
+            success = STDownloadStudy.delay(self.api_url, self.verify_cert, self.user, self.password, study_id,
+                                            django_user.email, study, patient, self.transaction_id,
+                                            self.transaction_user)
+
         except Exception as e:
             print('common/ortc.py/DownloadStudy')
             print(str(e))
@@ -444,7 +446,7 @@ class ORTC:
 
         # Donnera le résultat de l'opération
         success = False
-        
+
         try:
 
             # Des détails
@@ -455,13 +457,15 @@ class ORTC:
             # Récupère les données de la série
             serie = self.GetSerie(serie_id)
             if serie:
-                study = self.GetStudy(serie['ParentStudy'])                
+                study = self.GetStudy(serie['ParentStudy'])
                 if study:
                     patient = self.GetPatient(study['ParentPatient'])
 
             # Lance en // la tâche de récupération de l'étude
-            success = STDownloadSerie.delay(self.api_url, self.verify_cert, self.user, self.password, serie_id, django_user.email, serie, study, patient, self.transaction_id, self.transaction_user)
-            
+            success = STDownloadSerie.delay(self.api_url, self.verify_cert, self.user, self.password, serie_id,
+                                            django_user.email, serie, study, patient, self.transaction_id,
+                                            self.transaction_user)
+
         except Exception as e:
             print('common/ortc.py/DownloadSerie')
             print(str(e))
