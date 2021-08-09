@@ -25,7 +25,7 @@ import syslog
 import uuid
 import markdown2
 
-from common.config import params
+from zcommon.config import params
 
 # Récupère les infos nécessaires à la connexion au serveur orthanc
 def get_orthanc_server():
@@ -109,7 +109,7 @@ def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=N
             zlog('success', transaction_id, transaction_user)
             
     except Exception as e:
-        msg = 'common/utils.py/send_mail : {}'.str(e)
+        msg = 'zcommon/utils.py/send_mail : {}'.str(e)
         zlog(msg, transaction_id, transaction_user, 'ERR')
 
     return success

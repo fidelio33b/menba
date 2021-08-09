@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from common.ortc import ORTC
-from common.utils import get_orthanc_server
+from zcommon.ortc import ORTC
+from zcommon.utils import get_orthanc_server
 
 
 # La page d'accueil

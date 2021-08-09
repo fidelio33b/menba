@@ -23,7 +23,7 @@ import uuid
 
 import requests
 
-from common.tasks import STDownloadStudy, STDownloadSerie
+from zcommon.tasks import STDownloadStudy, STDownloadSerie
 
 # Timeout for to stop requests waiting for a response after a given number of seconds
 #   - https://docs.python-requests.org/en/latest/user/quickstart/#timeouts
@@ -472,7 +472,7 @@ class ORTC:
                                             self.transaction_user)
 
         except Exception as e:
-            print('common/ortc.py/DownloadStudy')
+            print('zcommon/ortc.py/DownloadStudy')
             print(str(e))
 
         finally:
@@ -504,7 +504,7 @@ class ORTC:
                                             self.transaction_user)
 
         except Exception as e:
-            print('common/ortc.py/DownloadSerie')
+            print('zcommon/ortc.py/DownloadSerie')
             print(str(e))
 
         finally:

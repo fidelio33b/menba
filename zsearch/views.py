@@ -22,9 +22,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView, ListView
 
-from common.ortc import ORTC
-from common.config import params
-from common.utils import get_orthanc_server
+from zcommon.ortc import ORTC
+from zcommon.config import params
+from zcommon.utils import get_orthanc_server
 
 from .forms import PatientForm, StudyForm
 

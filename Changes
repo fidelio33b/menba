@@ -26,3 +26,9 @@
 
 0.1.2 - 10/05/2021
   - script d'installation automatique type "all in one" pour distros ubuntu (bionic et focal)
+
+0.1.5 - 09/08/2021
+  - ajout du numéro de version du serveur orthanc dans la fenêtre des informations
+
+0.1.6 - 09/08/2021
+  - common -> zcommon

@@ -24,9 +24,9 @@ from django.views.generic import TemplateView, DetailView, ListView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from common.ortc import ORTC
-from common.config import params
-from common.utils import get_orthanc_server
+from zcommon.ortc import ORTC
+from zcommon.config import params
+from zcommon.utils import get_orthanc_server
 
 def _get_form(request, formcls, prefix):
     data = request.POST if prefix in request.POST else None

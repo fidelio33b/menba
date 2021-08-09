@@ -26,8 +26,8 @@ from django.utils.translation import gettext as _
 from time import sleep as tsleep
 from celery import shared_task
 
-from common.config import params
-from common.utils import send_mail, zlog
+from zcommon.config import params
+from zcommon.utils import send_mail, zlog
 
 # Timeout for to stop requests waiting for a response after a given number of seconds
 #   - https://docs.python-requests.org/en/latest/user/quickstart/#timeouts
@@ -101,7 +101,7 @@ Patient : {}
         success = True
 
     except Exception as e:
-        print('common/tasks.py/STDownloadStudy')
+        print('zcommon/tasks.py/STDownloadStudy')
         print(str(e))
 
     finally:
@@ -164,7 +164,7 @@ def STDownloadSerie(api_url, verify_cert, orthanc_user, orthanc_password, serie_
         success = True
 
     except Exception as e:
-        print('common/tasks.py/STDownloadSerie')
+        print('zcommon/tasks.py/STDownloadSerie')
         print(str(e))
 
     finally:
