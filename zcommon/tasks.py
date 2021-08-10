@@ -18,27 +18,26 @@ along with Menba.  If not, see <https://www.gnu.org/licenses/>.
 Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 """
 
-import requests
 import os
 
-from django.utils.translation import gettext as _
-
-from time import sleep as tsleep
+import requests
 from celery import shared_task
+from django.utils.translation import gettext as _
 
 from zcommon.config import params
 from zcommon.utils import send_mail, zlog
 
 # Timeout for to stop requests waiting for a response after a given number of seconds
 #   - https://docs.python-requests.org/en/latest/user/quickstart/#timeouts
-TIMEOUT_GET_REQUEST=(2, 120)
+TIMEOUT_GET_REQUEST = (2, 120)
+
 
 @shared_task
-def STDownloadStudy(api_url, verify_cert, orthanc_user, orthanc_password, study_id, user_email, study, patient, transaction_id, transaction_user):
-
+def STDownloadStudy(api_url, verify_cert, orthanc_user, orthanc_password, study_id, user_email, study, patient,
+                    transaction_id, transaction_user):
     # Donnera le résultat de l'opération
     success = False
-        
+
     try:
         # Log
         zlog('downloading study {}'.format(study_id), transaction_id, transaction_user)
@@ -64,7 +63,7 @@ def STDownloadStudy(api_url, verify_cert, orthanc_user, orthanc_password, study_
         # Stockage du flux archive dans un fichier
         directory = params['files']['directory'] + '/' + transaction_user + '/studies'
         if not os.path.exists(directory):
-            zlog('--> creating directory {}'.format(directory), transaction_id, transaction_user)
+            zlog('creating directory {}'.format(directory), transaction_id, transaction_user)
             os.makedirs(directory)
         filename = study_id + '.zip'
         fullpath = directory + '/' + filename
@@ -78,26 +77,23 @@ def STDownloadStudy(api_url, verify_cert, orthanc_user, orthanc_password, study_
 
         # Envoi du mail avec le lien de téléchargement
         if user_email is not None:
-            subject = '['+ params['app']['name'] + '] - ' + 'Download link'
+            subject = '[' + params['app']['name'] + '] - ' + 'Download link'
             sender = params['mail']['sender']
             recipients = []
             recipients.append(user_email)
-            body_md = """# Download study
-
-[Download link]({})
-
-Descritption : {}
-
-Patient : {}
-
-""".format(link, study['MainDicomTags']['StudyDescription'], patient['MainDicomTags']['PatientName'])
 
             # A traduire...
-            body_md = _('mail study download pitch %(link)s %(study_description)s %(patient)s') % {'link': link, 'study_description': study['MainDicomTags']['StudyDescription'], 'patient': patient['MainDicomTags']['PatientName']}
+            body_md = _('mail study download pitch %(link)s '
+                        '%(study_description)s %(patient)s') % {'link': link,
+                                                                'study_description':
+                                                                    study['MainDicomTags']['StudyDescription'],
+                                                                'patient': patient['MainDicomTags']['PatientName']
+                                                                }
 
             # Envoi du mail
-            send_mail(subject, sender, recipients, body_md, transaction_id=transaction_id, transaction_user=transaction_user)
-                
+            send_mail(subject, sender, recipients, body_md, transaction_id=transaction_id,
+                      transaction_user=transaction_user)
+
         success = True
 
     except Exception as e:
@@ -107,12 +103,13 @@ Patient : {}
     finally:
         return success
 
-@shared_task
-def STDownloadSerie(api_url, verify_cert, orthanc_user, orthanc_password, serie_id, user_email, serie, study, patient, transaction_id, transaction_user):
 
+@shared_task
+def STDownloadSerie(api_url, verify_cert, orthanc_user, orthanc_password, serie_id, user_email, serie, study, patient,
+                    transaction_id, transaction_user):
     # Donnera le résultat de l'opération
     success = False
-        
+
     try:
         # Log
         zlog('downloading serie {}'.format(serie_id), transaction_id, transaction_user)
@@ -152,14 +149,19 @@ def STDownloadSerie(api_url, verify_cert, orthanc_user, orthanc_password, serie_
 
         # Envoi du mail avec le lien de téléchargement
         if user_email is not None:
-            subject = '['+ params['app']['name'] + '] - ' + 'Download link'
+            subject = '[' + params['app']['name'] + '] - ' + 'Download link'
             sender = params['mail']['sender']
             recipients = []
             recipients.append(user_email)
 
             # A trduire...
-            body_md = _('mail serie download pitch %(link)s %(serie_description)s %(study_description)s %(patient)s') % {'link': link, 'serie_description': serie['MainDicomTags']['SeriesDescription'], 'study_description': study['MainDicomTags']['StudyDescription'], 'patient': patient['MainDicomTags']['PatientName']}
-            send_mail(subject, sender, recipients, body_md, transaction_id=transaction_id, transaction_user=transaction_user)
+            body_md = _(
+                'mail serie download pitch %(link)s %(serie_description)s %(study_description)s %(patient)s') % {
+                          'link': link, 'serie_description': serie['MainDicomTags']['SeriesDescription'],
+                          'study_description': study['MainDicomTags']['StudyDescription'],
+                          'patient': patient['MainDicomTags']['PatientName']}
+            send_mail(subject, sender, recipients, body_md, transaction_id=transaction_id,
+                      transaction_user=transaction_user)
 
         success = True
 

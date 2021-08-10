@@ -18,18 +18,16 @@ along with Menba.  If not, see <https://www.gnu.org/licenses/>.
 Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 """
 
-from django.core.mail import EmailMultiAlternatives
-from django.utils.translation import gettext as _
-
 import syslog
-import uuid
+
 import markdown2
+from django.core.mail import EmailMultiAlternatives
 
 from zcommon.config import params
 
+
 # Récupère les infos nécessaires à la connexion au serveur orthanc
 def get_orthanc_server():
-    
     orthanc_server = {}
 
     orthanc_server['name'] = params['orthanc_server']
@@ -40,13 +38,13 @@ def get_orthanc_server():
 
     return orthanc_server
 
+
 # Log
 def zlog(msg, prefix=None, transaction_user=None, facility=None):
-
     # Definit les paramètres
     ident = params['app']['name']
     msg = '[{}] ({}) {}'.format(prefix, transaction_user, msg)
-    if facility == None or facility == 'INFO':
+    if facility is None or facility == 'INFO':
         facility = syslog.LOG_INFO
     elif facility == 'WARNING':
         facility = syslog.LOG_WARNING
@@ -56,41 +54,41 @@ def zlog(msg, prefix=None, transaction_user=None, facility=None):
         facility = syslog.LOG_WARNING
 
     # Positionne syslog
-    syslog.openlog(ident=ident, logoption=syslog.LOG_PID, facility=syslog.LOG_INFO)
+    syslog.openlog(ident=ident, logoption=syslog.LOG_PID, facility=facility)
 
     # Log !
     syslog.syslog(msg)
 
     # Ferme le log
-    syslog.closelog()    
+    syslog.closelog()
+
 
 #
 # Envoi d'un mail
 #
-def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=None, attach=None, transaction_id=None, transaction_user=None):
-
-    succes = False
+def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=None, attach=None, transaction_id=None,
+              transaction_user=None):
+    success = False
 
     try:
 
         # Génère le corps au format html si nécessaire
         if body_html is None:
-
-            body_html='''<html>
+            body_html = '''<html>
             <head>
             <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <title>test</title>
             </head>
             <body><div style="font-family:Arial, Helvetica, sans-serif; font-size:14px;">
             {}
-'''.format(markdown2.markdown(body, extras=["break-on-newline", 'tables',])) + '''</div></body>
+'''.format(markdown2.markdown(body, extras=["break-on-newline", 'tables', ])) + '''</div></body>
 </html>
 '''
 
         # Double format : texte et html
         email = EmailMultiAlternatives(subject, body, sender, recipients, cc=recipients_cc)
         email.attach_alternative(body_html, 'text/html')
-        
+
         # Une pièce jointe ?     
         if attach:
             email.attach_file(attach)
@@ -107,9 +105,9 @@ def send_mail(subject, sender, recipients, body, body_html=None, recipients_cc=N
         # Log de confirmation
         if success is True:
             zlog('success', transaction_id, transaction_user)
-            
+
     except Exception as e:
-        msg = 'zcommon/utils.py/send_mail : {}'.str(e)
+        msg = 'zcommon/utils.py/send_mail : {}' + str(e)
         zlog(msg, transaction_id, transaction_user, 'ERR')
 
     return success

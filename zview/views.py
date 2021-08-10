@@ -37,7 +37,7 @@ def _get_form(request, formcls, prefix):
 # La liste des patients
 class Patients(ListView):
 
-    template_name = 'view/patients.html'
+    template_name = 'zview/patients.html'
     context_object_name = 'patients'
 
     # Le serveur orthanc
@@ -82,7 +82,7 @@ class Patients(ListView):
 # Un patient
 class Patient(ListView):
 
-    template_name = 'view/patient.html'
+    template_name = 'zview/patient.html'
     context_object_name = 'studies'
 
     # Le serveur orthanc
@@ -136,7 +136,7 @@ class Patient(ListView):
 # Des études
 class Studies(ListView):
 
-    template_name = 'view/studies.html'
+    template_name = 'zview/studies.html'
     context_object_name = 'studies'
     paginate_by = params['paginate_by']
     request = None
@@ -187,7 +187,7 @@ class Studies(ListView):
 # Une étude
 class Study(ListView):
 
-    template_name = 'view/study.html'
+    template_name = 'zview/study.html'
     context_object_name = 'series'
 
     # Le serveur orthanc
@@ -254,7 +254,7 @@ class Study(ListView):
 # Téléchargement d'une étude
 class StudyDownload(LoginRequiredMixin, TemplateView):
 
-    template_name = 'view/study_download.html'
+    template_name = 'zview/study_download.html'
 
     # Le serveur orthanc
     orthanc_server = get_orthanc_server()
@@ -310,7 +310,7 @@ class StudyDownload(LoginRequiredMixin, TemplateView):
 # Une série
 class Serie(DetailView):
 
-    template_name = 'view/serie.html'
+    template_name = 'zview/serie.html'
     context_object_name = 'serie'
 
     # Le serveur orthanc
@@ -364,7 +364,7 @@ class Serie(DetailView):
 # Téléchargement d'une série
 class SerieDownload(LoginRequiredMixin, TemplateView):
 
-    template_name = 'view/serie_download.html'
+    template_name = 'zview/serie_download.html'
 
     # Le serveur orthanc
     orthanc_server = get_orthanc_server()
