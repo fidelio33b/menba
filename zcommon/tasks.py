@@ -73,7 +73,7 @@ def STDownloadStudy(api_url, verify_cert, orthanc_user, orthanc_password, study_
                 fd.write(chunk)
 
         # Log
-        zlog('study succesfully downloaded', transaction_id, transaction_user)
+        zlog('study successfully downloaded', transaction_id, transaction_user)
 
         # Envoi du mail avec le lien de téléchargement
         if user_email is not None:
