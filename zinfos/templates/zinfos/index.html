@@ -1,88 +1,113 @@
-{%extends "zhome/base.html" %}
-{%load i18n %}
-{%load static %}
+{% extends "zhome/base.html" %}
+{% load i18n %}
+{% load static %}
 
-{%block title %}{%translate "informations"|capfirst %}{%endblock title %}
+{% block title %}{% translate "informations"|capfirst %}{% endblock title %}
 
-{%block base_body %}
+{% block base_body %}
 
-<!-- breadcrumb -->
-<div class="container">
-    <nav aria-label="breadcrumb">
-        <ol class="shadow breadcrumb bg-light">
-            <li class="breadcrumb-item active"><a class="s1" href="{%url 'zhome:index' %}">{%translate "home"|capfirst %}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{%translate "informations"|capfirst %}</li>
-        </ol>
-    </nav>
-</div>
+    <!-- Breadcrumb -->
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="shadow breadcrumb bg-light">
+                <li class="breadcrumb-item active"><a class="s1"
+                                                      href="{% url 'zhome:index' %}">{% translate "home"|capfirst %}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{% translate "informations"|capfirst %}</li>
+            </ol>
+        </nav>
+    </div>
 
-<div class="container">
+    <div class="container">
 
-    <br>
+        <br>
 
-    <div class="row">
+        <div class="row">
 
-        <div class="col-sm-6">
-            <div class="shadow card">
-                <h5 class="card-header">Orthanc</h5>
-                <div class="card-body">
+            <!-- Carte Orthanc -->
+            <div class="col-sm-6">
+                <div class="shadow card">
+                    <h5 class="card-header">Orthanc</h5>
+                    <div class="card-body">
 
-                    {%if stats %}
-                    <table class="table table-hover table-sm table-borderless">
-                        <tbody>
-                        <tr class="text-secondary">
-                            <th scope="row" width="40%">{%translate "server"|capfirst %}</th>
-                            <td>{%if orthanc_name %}{{ orthanc_name }}{%else %}{%translate "not available"|capfirst
-                                %}{%endif %}
-                            </td>
-                        </tr>
-                        {% if infos %}
-                            <tr class="text-secondary">
-                            <th scope="row" width="40%">{%translate "version"|capfirst %}</th>
-                            <td>{%if infos.Version %}{{ infos.Version }}{%else %}{%translate "not available"|capfirst
-                                %}{%endif %}
-                            </td>
-                        </tr>
+                        {% if stats %}
+                            <table class="table table-hover table-sm table-borderless">
+                                <tbody>
+                                <tr class="text-secondary">
+                                    <th scope="row" style="width: 40%;">{% translate "server"|capfirst %}</th>
+                                    <td>{% if orthanc_name %}{{ orthanc_name }}{% else %}
+                                        {% translate "not available"|capfirst
+                                        %}{% endif %}
+                                    </td>
+                                </tr>
+                                {% if infos %}
+                                    <tr class="text-secondary">
+                                        <th scope="row" style="width: 40%;">{% translate "version"|capfirst %}</th>
+                                        <td>{% if infos.Version %}{{ infos.Version }}{% else %}
+                                            {% translate "not available"|capfirst
+                                            %}{% endif %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                <tr class="text-secondary">
+                                    <th scope="row" style="width: 40%;">{% translate "instances"|capfirst %}</th>
+                                    <td>{% if stats.CountInstances %}{{ stats.CountInstances }}{% else %}
+                                        {% translate "not
+                                        available"|capfirst %}{% endif %}
+                                    </td>
+                                </tr>
+                                <tr class="text-secondary">
+                                    <th scope="row" style="width: 40%;">{% translate "patients"|capfirst %}</th>
+                                    <td>{% if stats.CountPatients %}{{ stats.CountPatients }}{% else %}{% translate "not
+                                        available"|capfirst %}{% endif %}
+                                    </td>
+                                </tr>
+                                <tr class="text-secondary">
+                                    <th scope="row" style="width: 40%;">{% translate "series"|capfirst %}</th>
+                                    <td>{% if stats.CountSeries %}{{ stats.CountSeries }}{% else %}{% translate "not
+                                        available"|capfirst %}{% endif %}
+                                    </td>
+                                </tr>
+                                <tr class="text-secondary">
+                                    <th scope="row" style="width: 40%;">{% translate "studies"|capfirst %}</th>
+                                    <td>{% if stats.CountStudies %}{{ stats.CountStudies }}{% else %}{% translate "not
+                                        available"|capfirst %}{% endif %}
+                                    </td>
+                                </tr>
+                                <tr class="text-secondary">
+                                    <th scope="row" style="width: 40%;">{% translate "disk size"|capfirst %}</th>
+                                    <td>{% if stats.TotalDiskSize %}{{ stats.TotalDiskSize|filesizeformat }}{% else %}
+                                        {% translate
+                                        "not available"|capfirst %}{% endif %}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        {% else %}
+                            {% translate "no statistics"|capfirst %}
                         {% endif %}
-                        <tr class="text-secondary">
-                            <th scope="row" width="40%">{%translate "instances"|capfirst %}</th>
-                            <td>{%if stats.CountInstances %}{{ stats.CountInstances }}{%else %}{%translate "not
-                                available"|capfirst %}{%endif %}
-                            </td>
-                        </tr>
-                        <tr class="text-secondary">
-                            <th scope="row" width="40%">{%translate "patients"|capfirst %}</th>
-                            <td>{%if stats.CountPatients %}{{ stats.CountPatients }}{%else %}{%translate "not
-                                available"|capfirst %}{%endif %}
-                            </td>
-                        </tr>
-                        <tr class="text-secondary">
-                            <th scope="row" width="40%">{%translate "series"|capfirst %}</th>
-                            <td>{%if stats.CountSeries %}{{ stats.CountSeries }}{%else %}{%translate "not
-                                available"|capfirst %}{%endif %}
-                            </td>
-                        </tr>
-                        <tr class="text-secondary">
-                            <th scope="row" width="40%">{%translate "studies"|capfirst %}</th>
-                            <td>{%if stats.CountStudies %}{{ stats.CountStudies }}{%else %}{%translate "not
-                                available"|capfirst %}{%endif %}
-                            </td>
-                        </tr>
-                        <tr class="text-secondary">
-                            <th scope="row" width="40%">{%translate "disk size"|capfirst %}</th>
-                            <td>{%if stats.TotalDiskSize %}{{ stats.TotalDiskSize|filesizeformat }}{%else %}{%translate
-                                "not available"|capfirst %}{%endif %}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    {%else %}
-                    {%translate "no statistics"|capfirst %}
-                    {%endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carte Menba -->
+            <div class="col-sm-6">
+                <div class="shadow card">
+                    <h5 class="card-header">Menba</h5>
+                    <div class="card-body">
+
+                        <table class="table table-hover table-sm table-borderless">
+                            <tbody>
+                            <tr class="text-secondary">
+                                <th scope="row" style="width: 40%;">{% translate "version"|capfirst %}</th>
+                                <td>{{ menba_version }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-{%endblock base_body %}
+{% endblock base_body %}

@@ -20,14 +20,13 @@ Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 
 from django.shortcuts import render
 
+from zcommon.config import params
 from zcommon.ortc import ORTC
 from zcommon.utils import get_orthanc_server
 
 
 # La page d'accueil
 def index(request):
-    stats = None
-
     # Récupère les statistiques et les informations système du serveur
     orthanc_server = get_orthanc_server()
     o = ORTC(
@@ -40,4 +39,9 @@ def index(request):
     infos = o.GetSystemInfos()
 
     return render(request, 'zinfos/index.html',
-                  {'orthanc_name': orthanc_server['name'], 'stats': stats, 'infos': infos})
+                  {
+                      'orthanc_name': orthanc_server['name'],
+                      'stats': stats, 'infos': infos,
+                      'menba_version': params['app']['version'],
+                  }
+                  )
