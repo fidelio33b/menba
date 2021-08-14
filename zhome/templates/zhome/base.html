@@ -1,5 +1,5 @@
-{%load i18n %}
-{%load static %}
+{% load i18n %}
+{% load static %}
 
 <!doctype html>
 <html class="no-js">
@@ -9,22 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Menba - Easily browse and export orthanc data !">
     <meta name="author" content="Laurent Lavaud">
-    {# Meta #}{%block meta %}{%endblock meta %}
-    {# Title #}{%block base_title %}<title>Menba - {%block title %}L'objectif de la page{%endblock title %}</title>
-    {%endblock base_title %}
+    {# Meta #}{% block meta %}{% endblock meta %}
+    {# Title #}{% block base_title %}<title>Menba - {% block title %}L'objectif de la page{% endblock title %}</title>
+    {% endblock base_title %}
 
     {# Favicon #}
-    <link href="{%get_media_prefix %}icons/ico/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
-    {# Bootstrap CSS #}{%block bootstrap_css %}
-    <link href="{%static 'css/bootstrap-4.5.3.min.css' %}" rel="stylesheet"/>
-    {%endblock bootstrap_css %}
-    {# Fontawesome CSS #}{%block fontawesome_css %}
-    <link href="{% static 'fontawesome/5.15.1/css/all.css' %}" rel="stylesheet"/>
-    {%endblock fontawesome_css %}
-    {# Custom CSS #}{%block css %}
-    <link href="{%static 'css/body.css' %}" rel="stylesheet"/>
-    {%endblock css %}
-    {# Custom head JS #}{%block head_js %}{%endblock head_js %}
+    <link href="{% get_media_prefix %}icons/ico/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+    {# Bootstrap CSS #}{% block bootstrap_css %}
+        <link href="{% static 'css/bootstrap-4.5.3.min.css' %}" rel="stylesheet"/>
+    {% endblock bootstrap_css %}
+    {# Fontawesome CSS #}{% block fontawesome_css %}
+        <link href="{% static 'fontawesome/5.15.1/css/all.css' %}" rel="stylesheet"/>
+    {% endblock fontawesome_css %}
+    {# Custom CSS #}{% block css %}
+        <link href="{% static 'css/body.css' %}" rel="stylesheet"/>
+    {% endblock css %}
+    {# Custom head JS #}{% block head_js %}{% endblock head_js %}
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -41,10 +41,10 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{%url 'zview:apatients' %}">{% translate "browse"|capfirst %}</a>
+                        <a class="nav-link" href="{% url 'zview:apatients' %}">{% translate "browse"|capfirst %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{%url 'zsearch:index' %}">{% translate "search"|capfirst %}</a>
+                        <a class="nav-link" href="{% url 'zsearch:index' %}">{% translate "search"|capfirst %}</a>
                     </li>
                 </ul>
             </div>
@@ -54,50 +54,48 @@
 
 <!-- BODY -->
 <div class="container">
-    {%block base_body %}{%endblock base_body %}
+    {% block base_body %}{% endblock base_body %}
 </div>
 
 <!-- FOOTER -->
 <div class="container">
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <p class="float-right"><a class="s1" href="#">{%translate "top of page"|capfirst %}</a></p>
+        <p class="float-right"><a class="s1" href="#">{% translate "top of page"|capfirst %}</a></p>
         <div class="row">
             <div class="col-8 col-md">
                 <small class="d-block mb-3 text-muted">&copy; 2021 <a class="s1" href="mailto:fidelio33b@gmail.com"
                                                                       target="_blank">Laurent Lavaud</a></small>
             </div>
             <div class="col-8 col-md">
-                <h5>{%translate "resources"|capfirst %}</h5>
+                <h5>{% translate "resources"|capfirst %}</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="s1" href="#">{%translate "documentation"|capfirst %}</a></li>
-                    <li><a class="s1" href="#">{%translate "contact"|capfirst %}</a></li>
+                    <li><a class="s1" href="#">{% translate "documentation"|capfirst %}</a></li>
+                    <li><a class="s1" href="#">{% translate "contact"|capfirst %}</a></li>
                 </ul>
             </div>
             <div class="col-8 col-md">
-                <h5>{%translate "about"|capfirst %}</h5>
+                <h5>{% translate "about"|capfirst %}</h5>
                 <ul class="list-unstyled text-small">
                     <li><a class="s1" href="https://github.com/fidelio33b/menba" target="_blank">GitHub</a></li>
-                    <li><a class="s1" href="{%url 'zinfos:index' %}">{%translate "informations"|capfirst %}</a></li>
+                    <li><a class="s1" href="{% url 'zinfos:index' %}">{% translate "informations"|capfirst %}</a></li>
                 </ul>
             </div>
         </div>
     </footer>
 </div>
 
-<script src="{%static 'js/jquery-3.5.1.slim.min.js' %}"></script>
-<script src="{%static 'js/popper-1.16.1.min.js' %}"></script>
-<script src="{%static 'js/bootstrap-4.5.3.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+<script src="{% static 'js/popper-1.16.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-4.5.3.min.js' %}"></script>
 
 <script>
-      $(document).ready(function(){
-      $('[data-toggle="tooltip"]').tooltip();
-      });
-
-
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 </script>
 
 {# Custom foot JS #}
-{%block foot_js %}{%endblock foot_js %}
+{% block foot_js %}{% endblock foot_js %}
 
 </body>
 
