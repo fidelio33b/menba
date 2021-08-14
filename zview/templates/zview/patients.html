@@ -6,7 +6,7 @@
 
 {% block base_body %}
 
-    <!-- breadcrumb -->
+    <!-- Breadcrumb -->
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="shadow breadcrumb bg-light">
@@ -27,8 +27,8 @@
 
     <div class="container">
 
+        <!-- Patients card -->
         {% if patients %}
-
             <br>
 
             <div class="row">
@@ -71,10 +71,9 @@
                         </ul>
                     </nav>
                 {% endif %}
-
             {% endif %}
-            <!-- Fin pagination -->
 
+            <!-- Patients -->
             <table class="table table-hover table-sm table-borderless">
                 <thead class="text-secondary">
                 <tr>
@@ -92,14 +91,22 @@
                                                                      data-toggle="tooltip" data-html="true"
                                                                      data-container="body" title="PatientID :
 
+
                                 {% if patient.MainDicomTags.PatientID %}{{ patient.MainDicomTags.PatientID }}{% else %}{% translate "not available"|capfirst %}{% endif %}"></i></a>
                         </td>
                         <td>{{ patient.MainDicomTags.PatientName }}</td>
-                        <td>{% if patient.MainDicomTags.PatientSex %}{{ patient.MainDicomTags.PatientSex }}{% else %}
-                            {% translate "not available"|capfirst %}{% endif %}</td>
+                        <td>{% if patient.MainDicomTags.PatientSex %}
+                                {{ patient.MainDicomTags.PatientSex }}
+                            {% else %}
+                                {% translate "not available"|capfirst %}
+                            {% endif %}
+                        </td>
                         <td>{% if patient.MainDicomTags.PatientBirthDate %}
-                            {{ patient.MainDicomTags.PatientBirthDate }}{% else %}
-                            {% translate "not available"|capfirst %}{% endif %}</td>
+                                {{ patient.MainDicomTags.PatientBirthDate }}
+                            {% else %}
+                                {% translate "not available"|capfirst %}
+                            {% endif %}
+                        </td>
                         <td>{{ patient.Studies|length }}</td>
                     </tr>
                 {% endfor %}
@@ -140,13 +147,10 @@
                         </ul>
                     </nav>
                 {% endif %}
-
             {% endif %}
-            <!-- Fin pagination -->
 
         {% else %}
             <br>
-
             <h5>{% translate "no patients"|capfirst %}</h5>
         {% endif %}
 

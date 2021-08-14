@@ -10,7 +10,7 @@
     <meta name="description" content="Menba - Easily browse and export orthanc data !">
     <meta name="author" content="Laurent Lavaud">
     {# Meta #}{% block meta %}{% endblock meta %}
-    {# Title #}{% block base_title %}<title>Menba - {% block title %}L'objectif de la page{% endblock title %}</title>
+    {# Title #}{% block base_title %}<title>Menba - {% block title %}Goal of the page{% endblock title %}</title>
     {% endblock base_title %}
 
     {# Favicon #}
@@ -29,7 +29,7 @@
 
 <body class="d-flex flex-column h-100">
 
-<!-- HEADER -->
+<!-- Header -->
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
@@ -52,12 +52,12 @@
     </nav>
 </header>
 
-<!-- BODY -->
+<!-- Body -->
 <div class="container">
     {% block base_body %}{% endblock base_body %}
 </div>
 
-<!-- FOOTER -->
+<!-- Footer -->
 <div class="container">
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <p class="float-right"><a class="s1" href="#">{% translate "top of page"|capfirst %}</a></p>

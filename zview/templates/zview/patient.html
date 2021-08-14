@@ -6,16 +6,20 @@
 
 {% block base_body %}
 
-    <!-- breadcrumb -->
+    <!-- Breadcrumb -->
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="shadow breadcrumb bg-light">
-                <li class="breadcrumb-item active"><a class="s1"
-                                                      href="{% url 'zhome:index' %}">{% translate "home"|capfirst %}</a>
+                <li class="breadcrumb-item active">
+                    <a class="s1"
+                       href="{% url 'zhome:index' %}">{% translate "home"|capfirst %}
+                    </a>
                 </li>
                 {% if ref == 'search' %}
-                    <li class="breadcrumb-item active"><a class="s1"
-                                                          href="{% url 'zsearch:index' %}">{% translate "search"|capfirst %}</a>
+                    <li class="breadcrumb-item active">
+                        <a class="s1"
+                           href="{% url 'zsearch:index' %}">{% translate "search"|capfirst %}
+                        </a>
                     </li>
                     <li class="breadcrumb-item">{% translate "results"|capfirst %}</li>
                 {% elif ref == 'all' %}
@@ -29,9 +33,9 @@
     </div>
 
     <div class="container">
-
         <br>
 
+        <!-- Patient card -->
         <div class="row">
             <div class="col-sm-6">
                 <div class="shadow card">
@@ -42,27 +46,43 @@
                             <tbody>
                             <tr class="text-secondary">
                                 <th scope="row">{% translate "name"|capfirst %}</th>
-                                <td>{% if patient.MainDicomTags.PatientName %}
-                                    {{ patient.MainDicomTags.PatientName }}{% else %}
-                                    {% translate "not available"|capfirst %}{% endif %}</td>
+                                <td>
+                                    {% if patient.MainDicomTags.PatientName %}
+                                        {{ patient.MainDicomTags.PatientName }}
+                                    {% else %}
+                                        {% translate "not available"|capfirst %}
+                                    {% endif %}
+                                </td>
                             </tr>
                             <tr class="text-secondary">
                                 <th scope="row">{% translate "birthdate"|capfirst %}</th>
-                                <td>{% if patient.MainDicomTags.PatientBirthDate %}
-                                    {{ patient.MainDicomTags.PatientBirthDate }}{% else %}
-                                    {% translate "not available"|capfirst %}{% endif %}</td>
+                                <td>
+                                    {% if patient.MainDicomTags.PatientBirthDate %}
+                                        {{ patient.MainDicomTags.PatientBirthDate }}
+                                    {% else %}
+                                        {% translate "not available"|capfirst %}
+                                    {% endif %}
+                                </td>
                             </tr>
                             <tr class="text-secondary">
                                 <th scope="row">{% translate "sex"|capfirst %}</th>
-                                <td>{% if patient.MainDicomTags.PatientSex %}
-                                    {{ patient.MainDicomTags.PatientSex }}{% else %}
-                                    {% translate "not available"|capfirst %}{% endif %}</td>
+                                <td>
+                                    {% if patient.MainDicomTags.PatientSex %}
+                                        {{ patient.MainDicomTags.PatientSex }}
+                                    {% else %}
+                                        {% translate "not available"|capfirst %}
+                                    {% endif %}
+                                </td>
                             </tr>
                             <tr class="text-secondary">
                                 <th scope="row">{% translate "patient ID"|capfirst %} ({% translate "modality" %})</th>
-                                <td>{% if patient.MainDicomTags.PatientID %}
-                                    {{ patient.MainDicomTags.PatientID }}{% else %}
-                                    {% translate "not available"|capfirst %}{% endif %}</td>
+                                <td>
+                                    {% if patient.MainDicomTags.PatientID %}
+                                        {{ patient.MainDicomTags.PatientID }}
+                                    {% else %}
+                                        {% translate "not available"|capfirst %}
+                                    {% endif %}
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -71,8 +91,8 @@
             </div>
         </div>
 
+        <!-- Studies card -->
         {% if studies %}
-
             <br>
 
             <div class="row">
@@ -83,7 +103,6 @@
 
             <!-- Pagination -->
             {% if page_obj|length > 0 %}
-
                 {% if page_obj.paginator.num_pages > 1 %}
                     <nav aria-label="Page navigation example">
                         <ul class="pagination pagination-sm justify-content-left">
@@ -115,10 +134,9 @@
                         </ul>
                     </nav>
                 {% endif %}
-
             {% endif %}
-            <!-- Fin pagination -->
 
+            <!-- Studies -->
             <table class="table table-hover table-sm table-borderless">
                 <thead class="text-secondary">
                 <tr>
@@ -133,26 +151,49 @@
                 <tbody>
                 {% for study in studies %}
                     <tr class="text-secondary">
-                        <td><a class="s2" href="../../studies/{{ study.ID }}"><i class="fas fa-info-circle fa-1x"
-                                                                                 data-toggle="tooltip" data-html="true"
-                                                                                 data-container="body" title="StudyID :
-
-                                {% if study.MainDicomTags.StudyID %}{{ study.MainDicomTags.StudyID }}{% else %}{% translate "not available"|capfirst %}{% endif %}"></i></a>
+                        <td><a class="s2" href="../../studies/{{ study.ID }}">
+                            <i class="fas fa-info-circle fa-1x"
+                               data-toggle="tooltip" data-html="true"
+                               data-container="body" title="StudyID :
+                                    {% if study.MainDicomTags.StudyID %}
+                                        {{ study.MainDicomTags.StudyID }}
+                                    {% else %}
+                                        {% translate "not available"|capfirst %}
+                                    {% endif %}">
+                            </i>
+                        </a>
                         </td>
-                        <td>{% if study.MainDicomTags.StudyDescription %}
-                            {{ study.MainDicomTags.StudyDescription }}{% else %}
-                            {% translate "not available"|capfirst %}{% endif %}</td>
+                        <td>
+                            {% if study.MainDicomTags.StudyDescription %}
+                                {{ study.MainDicomTags.StudyDescription }}
+                            {% else %}
+                                {% translate "not available"|capfirst %}
+                            {% endif %}
+                        </td>
                         <td>{% if study.MainDicomTags.RequestedProcedureDescription %}
-                            {{ study.MainDicomTags.RequestedProcedureDescription }}{% else %}
-                            {% translate "not available"|capfirst %}{% endif %}</td>
-                        <td>{% if study.MainDicomTags.StudyDate %}{{ study.MainDicomTags.StudyDate }}{% else %}
-                            {% translate "not available"|capfirst %}{% endif %}</td>
+                            {{ study.MainDicomTags.RequestedProcedureDescription }}
+                        {% else %}
+                            {% translate "not available"|capfirst %}
+                        {% endif %}
+                        </td>
+                        <td>{% if study.MainDicomTags.StudyDate %}
+                            {{ study.MainDicomTags.StudyDate }}
+                        {% else %}
+                            {% translate "not available"|capfirst %}
+                        {% endif %}
+                        </td>
                         <td>{% if study.MainDicomTags.InstitutionName %}
-                            {{ study.MainDicomTags.InstitutionName }}{% else %}
-                            {% translate "not available"|capfirst %}{% endif %}</td>
+                            {{ study.MainDicomTags.InstitutionName }}
+                        {% else %}
+                            {% translate "not available"|capfirst %}
+                        {% endif %}
+                        </td>
                         <td>{% if study.MainDicomTags.ReferringPhysicianName %}
-                            {{ study.MainDicomTags.ReferringPhysicianName }}{% else %}
-                            {% translate "not available"|capfirst %}{% endif %}</td>
+                            {{ study.MainDicomTags.ReferringPhysicianName }}
+                        {% else %}
+                            {% translate "not available"|capfirst %}
+                        {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -192,9 +233,7 @@
                         </ul>
                     </nav>
                 {% endif %}
-
             {% endif %}
-            <!-- Fin pagination -->
 
         {% else %}
             <h4>{% translate "no studies"|capfirst %}</h4>

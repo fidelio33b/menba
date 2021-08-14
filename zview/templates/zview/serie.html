@@ -6,7 +6,7 @@
 
 {% block base_body %}
 
-    <!-- breadcrumb -->
+    <!-- Breadcrumb -->
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="shadow breadcrumb bg-light">
@@ -37,9 +37,9 @@
     </div>
 
     <div class="container">
-
         <br>
 
+        <!-- Card serie -->
         <div class="row">
             <div class="col-sm-6">
                 <div class="shadow card">
@@ -51,13 +51,20 @@
                             <tr class="text-secondary">
                                 <td scope="col">{% translate "description"|capfirst %}</td>
                                 <td>{% if serie.MainDicomTags.SerieDescription %}
-                                    {{ serie.MainDicomTags.SerieDescription }}{% else %}
-                                    {% translate "not available"|capfirst %}{% endif %}</td>
+                                    {{ serie.MainDicomTags.SerieDescription }}
+                                {% else %}
+                                    {% translate "not available"|capfirst %}
+                                {% endif %}
+                                </td>
                             </tr>
                             <tr class="text-secondary">
                                 <td scope="col">{% translate "date"|capfirst %}</td>
-                                <td>{% if serie.MainDicomTags.SerieDate %}{{ serie.MainDicomTags.SerieDate }}{% else %}
-                                    {% translate "not available"|capfirst %}{% endif %}</td>
+                                <td>{% if serie.MainDicomTags.SerieDate %}
+                                    {{ serie.MainDicomTags.SerieDate }}
+                                {% else %}
+                                    {% translate "not available"|capfirst %}
+                                {% endif %}
+                                </td>
                             </tr>
                             </tbody>
                         </table>
