@@ -1,60 +1,72 @@
-{%extends "zhome/base.html" %}
-{%load i18n %}
-{%load static %}
+{% extends "zhome/base.html" %}
+{% load i18n %}
+{% load static %}
 
-{%block title %}{%translate "study download"|capfirst %}{% endblock title %}
+{% block title %}{% translate "study download"|capfirst %}{% endblock title %}
 
-{%block base_body %}
+{% block base_body %}
 
-<!-- breadcrumb -->
-<div class="container">
-  <nav aria-label="breadcrumb">
-    <ol class="shadow breadcrumb bg-light">
-      <li class="breadcrumb-item active"><a class="s1" href="{%url 'zhome:index' %}">{%translate "home"|capfirst %}</a></li>
-      {%if ref == 'search' %}
-      <li class="breadcrumb-item active"><a class="s1" href="{%url 'zsearch:index' %}">{%translate "search"|capfirst %}</a></li>
-      <li class="breadcrumb-item">{%translate "results"|capfirst %}</li>
-      {%elif ref == 'all' %}
-      <li class="breadcrumb-item active"><a class="s1" href="{%url 'zview:apatients' %}">{%translate "browse"|capfirst %}</a></li>
-      {%if patient.MainDicomTags.PatientName %}
-      <li class="breadcrumb-item active"><a class="s1" href="{%url 'zview:apatient' patient.ID %}">{%translate "patient"|capfirst %}</a></li>
-      {%endif %}
-      <li class="breadcrumb-item">{%translate "study"|capfirst %}</li>
-      {%endif %}
-    </ol>
-  </nav>
-</div>
-
-<div class="container">
-
-  <br>
-
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="shadow card">
-        <h5 class="card-header">{%translate "study download"|capfirst %}</h5>
-        <div class="card-body">
-
-	  <table class="table table-hover table-sm table-borderless">
-	    <tbody>
-	      <tr class="text-secondary">
-		<td scope="col">{%translate "description"|capfirst %}</td>
-		<td>{%if study.MainDicomTags.StudyDescription %}{{ study.MainDicomTags.StudyDescription }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
-	      </tr>
-	      <tr class="text-secondary">
-		<td scope="col">{%translate "date"|capfirst %}</td>
-		<td>{%if study.MainDicomTags.StudyDate %}{{ study.MainDicomTags.StudyDate }}{%else %}{%translate "not available"|capfirst %}{%endif %}</td>
-	      </tr>
-	    </tbody>
-	  </table>
-	</div>
-      </div>
+    <!-- breadcrumb -->
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="shadow breadcrumb bg-light">
+                <li class="breadcrumb-item active"><a class="s1"
+                                                      href="{% url 'zhome:index' %}">{% translate "home"|capfirst %}</a>
+                </li>
+                {% if ref == 'search' %}
+                    <li class="breadcrumb-item active"><a class="s1"
+                                                          href="{% url 'zsearch:index' %}">{% translate "search"|capfirst %}</a>
+                    </li>
+                    <li class="breadcrumb-item">{% translate "results"|capfirst %}</li>
+                {% elif ref == 'all' %}
+                    <li class="breadcrumb-item active"><a class="s1"
+                                                          href="{% url 'zview:apatients' %}">{% translate "browse"|capfirst %}</a>
+                    </li>
+                    {% if patient.MainDicomTags.PatientName %}
+                        <li class="breadcrumb-item active"><a class="s1"
+                                                              href="{% url 'zview:apatient' patient.ID %}">{% translate "patient"|capfirst %}</a>
+                        </li>
+                    {% endif %}
+                    <li class="breadcrumb-item">{% translate "study"|capfirst %}</li>
+                {% endif %}
+            </ol>
+        </nav>
     </div>
-  </div>
 
-  <br>
-  {%blocktranslate with email_field=django_user.email %}study download pitch {{ email_field }}.{%endblocktranslate %}
+    <div class="container">
 
-</div>
+        <br>
 
-{%endblock base_body %}
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="shadow card">
+                    <h5 class="card-header">{% translate "study download"|capfirst %}</h5>
+                    <div class="card-body">
+
+                        <table class="table table-hover table-sm table-borderless">
+                            <tbody>
+                            <tr class="text-secondary">
+                                <td scope="col">{% translate "description"|capfirst %}</td>
+                                <td>{% if study.MainDicomTags.StudyDescription %}
+                                    {{ study.MainDicomTags.StudyDescription }}{% else %}
+                                    {% translate "not available"|capfirst %}{% endif %}</td>
+                            </tr>
+                            <tr class="text-secondary">
+                                <td scope="col">{% translate "date"|capfirst %}</td>
+                                <td>{% if study.MainDicomTags.StudyDate %}{{ study.MainDicomTags.StudyDate }}{% else %}
+                                    {% translate "not available"|capfirst %}{% endif %}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        {% blocktranslate with email_field=django_user.email %}study download pitch {{ email_field }}
+            .{% endblocktranslate %}
+
+    </div>
+
+{% endblock base_body %}
