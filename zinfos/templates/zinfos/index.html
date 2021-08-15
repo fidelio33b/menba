@@ -24,7 +24,7 @@
 
         <div class="row">
 
-            <!-- Carte Orthanc -->
+            <!-- Orthanc card -->
             <div class="col-sm-6">
                 <div class="shadow card">
                     <h5 class="card-header">Orthanc</h5>
@@ -35,50 +35,67 @@
                                 <tbody>
                                 <tr class="text-secondary">
                                     <th scope="row" style="width: 40%;">{% translate "server"|capfirst %}</th>
-                                    <td>{% if orthanc_name %}{{ orthanc_name }}{% else %}
-                                        {% translate "not available"|capfirst
-                                        %}{% endif %}
+                                    <td>{% if orthanc_name %}
+                                        {{ orthanc_name }}
+                                    {% else %}
+                                        {% translate "not available"|capfirst %}
+                                    {% endif %}
                                     </td>
                                 </tr>
                                 {% if infos %}
                                     <tr class="text-secondary">
                                         <th scope="row" style="width: 40%;">{% translate "version"|capfirst %}</th>
-                                        <td>{% if infos.Version %}{{ infos.Version }}{% else %}
-                                            {% translate "not available"|capfirst
-                                            %}{% endif %}
+                                        <td>{% if infos.Version %}
+                                            {{ infos.Version }}
+                                        {% else %}
+                                            {% translate "not available"|capfirst %}
+                                        {% endif %}
                                         </td>
                                     </tr>
                                 {% endif %}
                                 <tr class="text-secondary">
                                     <th scope="row" style="width: 40%;">{% translate "instances"|capfirst %}</th>
-                                    <td>{% if stats.CountInstances %}{{ stats.CountInstances }}{% else %}
-                                        {% translate "not
-                                        available"|capfirst %}{% endif %}
+                                    <td>{% if stats.CountInstances %}
+                                        {{ stats.CountInstances }}
+                                    {% else %}
+                                        {% translate "not available"|capfirst %}
+                                    {% endif %}
                                     </td>
                                 </tr>
                                 <tr class="text-secondary">
                                     <th scope="row" style="width: 40%;">{% translate "patients"|capfirst %}</th>
-                                    <td>{% if stats.CountPatients %}{{ stats.CountPatients }}{% else %}{% translate "not
-                                        available"|capfirst %}{% endif %}
+                                    <td>{% if stats.CountPatients %}
+                                        {{ stats.CountPatients }}
+                                    {% else %}
+                                        {% translate "not available"|capfirst %}
+                                    {% endif %}
                                     </td>
                                 </tr>
                                 <tr class="text-secondary">
                                     <th scope="row" style="width: 40%;">{% translate "series"|capfirst %}</th>
-                                    <td>{% if stats.CountSeries %}{{ stats.CountSeries }}{% else %}{% translate "not
-                                        available"|capfirst %}{% endif %}
+                                    <td>{% if stats.CountSeries %}
+                                        {{ stats.CountSeries }}
+                                    {% else %}
+                                        {% translate "not available"|capfirst %}
+                                    {% endif %}
                                     </td>
                                 </tr>
                                 <tr class="text-secondary">
                                     <th scope="row" style="width: 40%;">{% translate "studies"|capfirst %}</th>
-                                    <td>{% if stats.CountStudies %}{{ stats.CountStudies }}{% else %}{% translate "not
-                                        available"|capfirst %}{% endif %}
+                                    <td>{% if stats.CountStudies %}
+                                        {{ stats.CountStudies }}
+                                    {% else %}
+                                        {% translate "not available"|capfirst %}
+                                    {% endif %}
                                     </td>
                                 </tr>
                                 <tr class="text-secondary">
-                                    <th scope="row" style="width: 40%;">{% translate "disk size"|capfirst %}</th>
-                                    <td>{% if stats.TotalDiskSize %}{{ stats.TotalDiskSize|filesizeformat }}{% else %}
-                                        {% translate
-                                        "not available"|capfirst %}{% endif %}
+                                    <th scope="row" style="width: 40%;">{% translate "disk used"|capfirst %}</th>
+                                    <td>{% if stats.TotalDiskSize %}
+                                        {{ stats.TotalDiskSize|filesizeformat }}
+                                    {% else %}
+                                        {% translate "not available"|capfirst %}
+                                    {% endif %}
                                     </td>
                                 </tr>
                                 </tbody>
