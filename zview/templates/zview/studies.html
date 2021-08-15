@@ -24,11 +24,11 @@
     </div>
 
     <div class="container">
-
         <br>
 
         <div class="row">
             <div class="col-sm">
+                <!-- Studies card -->
                 <div class="shadow card">
                     <h5 class="card-header">{% translate "studies"|capfirst %}</h5>
                     <div class="card-body">
@@ -83,16 +83,23 @@
                                     <th scope="col">{% translate "study date"|capfirst %}</th>
                                     <th scope="col">{% translate "institution name"|capfirst %}</th>
                                     <th scope="col">{% translate "referring physician name"|capfirst %}</th>
-                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% for study in studies %}
                                     <tr class="text-secondary">
-                                        <td><i class="fas fa-info-circle fa-1x" data-toggle="tooltip" data-html="true"
-                                               data-container="body" title="<p>StudyID :
-
-                                                {% if study.MainDicomTags.StudyID %}{{ study.MainDicomTags.StudyID }}{% else %}{% translate "not available"|capfirst %}{% endif %}</p>"></i>&nbsp;
+                                        <td>
+                                            <a class="s2" href="{{ study.ID }}">
+                                                <i class="fas fa-info-circle fa-1x"
+                                                   data-toggle="tooltip" data-html="true"
+                                                   data-container="body" title="StudyID :
+                                                    {% if study.MainDicomTags.StudyID %}
+                                                        {{ study.MainDicomTags.StudyID }}
+                                                    {% else %}
+                                                        {% translate "not available"|capfirst %}
+                                                    {% endif %}">
+                                                </i>
+                                            </a>
                                             {% if study.MainDicomTags.StudyDescription %}
                                                 {{ study.MainDicomTags.StudyDescription }}
                                             {% else %}
@@ -100,31 +107,29 @@
                                             {% endif %}
                                         </td>
                                         <td>{% if study.MainDicomTags.RequestedProcedureDescription %}
-                                                {{ study.MainDicomTags.RequestedProcedureDescription }}
-                                            {% else %}
-                                                {% translate "not available"|capfirst %}
-                                            {% endif %}
+                                            {{ study.MainDicomTags.RequestedProcedureDescription }}
+                                        {% else %}
+                                            {% translate "not available"|capfirst %}
+                                        {% endif %}
                                         </td>
                                         <td>{% if study.MainDicomTags.StudyDate %}
-                                                {{ study.MainDicomTags.StudyDate }}
-                                            {% else %}
-                                                {% translate "not available"|capfirst %}
-                                            {% endif %}
+                                            {{ study.MainDicomTags.StudyDate }}
+                                        {% else %}
+                                            {% translate "not available"|capfirst %}
+                                        {% endif %}
                                         </td>
                                         <td>{% if study.MainDicomTags.InstitutionName %}
-                                                {{ study.MainDicomTags.InstitutionName }}
-                                            {% else %}
-                                                {% translate "not available"|capfirst %}
-                                            {% endif %}
+                                            {{ study.MainDicomTags.InstitutionName }}
+                                        {% else %}
+                                            {% translate "not available"|capfirst %}
+                                        {% endif %}
                                         </td>
                                         <td>{% if study.MainDicomTags.ReferringPhysicianName %}
-                                                {{ study.MainDicomTags.ReferringPhysicianName }}
-                                            {% else %}
-                                                {% translate "not available"|capfirst %}
-                                            {% endif %}
+                                            {{ study.MainDicomTags.ReferringPhysicianName }}
+                                        {% else %}
+                                            {% translate "not available"|capfirst %}
+                                        {% endif %}
                                         </td>
-                                        <td><a class="btn btn-sm btn-outline-secondary" role="button"
-                                               href="{{ study.ID }}">{% translate "details"|capfirst %}</a></td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

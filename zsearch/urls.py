@@ -26,24 +26,17 @@ from zview import views as zviews
 app_name = 'zsearch'
 
 urlpatterns = [
-    # La page d'accueil
+    # Home page
     path('', sviews.Index.as_view(), name='index'),
 
-    # Le résultat de recherches
+    # Search results
     path('patients/', sviews.Patients.as_view(), {'ref': 'search',}, name='spatients'),
     path('studies/', sviews.Studies.as_view(), {'ref': 'search',}, name='sstudies'),
 
-    # Les détailsdonnées issues d'une recherche
-    #path('patients/', views.Patients.as_view(), {'ref': 'search',}, name='spatients'),
+    # Search details
     path('patients/<slug:patient_id>/', zviews.Patient.as_view(), {'ref': 'search',}, name='spatient'),
-    #path('studies/', views.Studies.as_view(), {'ref': 'search',}, name='sstudies'),
-    path('studies/<slug:study_id>/', zviews.Study.as_view(), {'ref': 'search',}, name='sstudy'),    
+    path('studies/<slug:study_id>/', zviews.Study.as_view(), {'ref': 'search',}, name='sstudy'),
     path('studies/<slug:study_id>/download/', zviews.StudyDownload.as_view(), {'ref': 'search',}, name='sstudydownload'),
     path('series/<slug:serie_id>/', zviews.Serie.as_view(), {'ref': 'search',}, name='sserie'),    
     path('series/<slug:serie_id>/download/', zviews.SerieDownload.as_view(), {'ref': 'search',}, name='sseriedownload'),
-    
-    # Les détails
-    #path('patients/<slug:patient_id>/', zviews.Patient.as_view(), {'ref': 'search',}, name='spatient'),
-    #path('studies/', zviews.Studies.as_view(), {'ref': 'search',}, name='sstudies'),
-    #path('studies/<slug:study_id>/', zviews.Study.as_view(), {'ref': 'search',}, name='sstudy'),
 ]
