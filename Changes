@@ -1,34 +1,40 @@
 0.0.1 - 01/02/2021
-  - parcours des patients
-  - détails d'un patient
-  - internationalisation des pages
+  - browse patients
+  - patient details
+  - page localization
 
 0.0.2 -
-  - formulaire de recherche
+  - search form
 
 0.0.3 - 18/03/2021
-  - un seul et même code /view pour traiter l'affichage des données de parcours ou de recherche
+  - same fragment of code to deal with viewing searched results and browsing all available data
 
 0.0.3.1 - 18/03/2021
-  - breadcrumb contextualisé en lien avec les urls
+  - contextualized breadcrumb linked with urls
 
 0.0.4 - 13/04/2021
   - envoi d'un lien pour télécharger un fichier archive d'étude ou de série
+  - email a download link to retrieve a study or a serie
 
 0.0.4.1 - 27/04/2021
-  - navigation par icônes plutôt que boutons
+  - use icons instead of buttons to navigate
 
 0.1 - 30/04/2021
-  - première version diffusée
+  - first published version
 
 0.1.1 - 05/05/2021
-  - procédure complète d'installation "all in one" dans le fichier INSTALL
+  - complete "all in one" installation procedure in INSTALL file
 
 0.1.2 - 10/05/2021
-  - script d'installation automatique type "all in one" pour distros ubuntu (bionic et focal)
+  - script to automate "all in one" deployment for debian distros (bionic and focal tested)
 
 0.1.5 - 09/08/2021
-  - ajout du numéro de version du serveur orthanc dans la fenêtre des informations
+  - add orthanc version number in "informations" page
 
 0.1.6 - 09/08/2021
   - common -> zcommon
+
+0.1.7 - 15/08/2021
+  - reformat python and html code
+  - minor changes in study details view shown after a search
+  - minor french translations
