@@ -369,7 +369,7 @@ EMAIL_USE_TLS = $EMAIL_USE_TLS
 EMAIL_HOST_USER = '$EMAIL_HOST_USER'
 EMAIL_HOST_PASSWORD = '$EMAIL_HOST_PASSWORD'
 
-# Celery           _                 
+# Celery
 CELERY_BROKER_URL = 'amqp://menba:${RABBITMQ_PASSWORD}@localhost:5672/menba'
 CELERY_TIMEZONE = "America/New_York"
 CELERY_TASK_TRACK_STARTED = True
@@ -439,6 +439,7 @@ Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 params = {
     'app': {
         'name': 'Menba',
+        'version': '0.1.7',
     },
     'paginate_by': 40,
     'orthanc_server': 'conf01',
@@ -577,7 +578,7 @@ ORTHANC_USER=read-only
 ORTHANC_PASSWORD=super.secret
 EMAIL_HOST=smtp.nodomain.com
 EMAIL_PORT=587
-EMAIL_USE_TLS=True
+EMAIL_USE_TLS=False
 EMAIL_HOST_USER=sender@nodomain.com
 EMAIL_HOST_PASSWORD=super.secret
 
