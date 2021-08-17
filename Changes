@@ -38,3 +38,9 @@
   - reformat python and html code
   - minor changes in study details view shown after a search
   - minor french translations
+
+0.2.0 - 
+  - user management
+    - create/delete/show
+    - profile types to do specific operations like eg. browsing
+    - delegate management to some profiles
