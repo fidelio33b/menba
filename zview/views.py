@@ -18,25 +18,24 @@ along with Menba.  If not, see <https://www.gnu.org/licenses/>.
 Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 """
 
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.views.generic import TemplateView, DetailView, ListView
-from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.views.generic import TemplateView, DetailView, ListView
 
-from zcommon.ortc import ORTC
 from zcommon.config import params
+from zcommon.ortc import ORTC
 from zcommon.utils import get_orthanc_server
+
 
 def _get_form(request, formcls, prefix):
     data = request.POST if prefix in request.POST else None
     return formcls(data, prefix=prefix)
 
+
 # La page d'accueil c'est la liste des patients
 
 # La liste des patients
 class Patients(ListView):
-
     template_name = 'zview/patients.html'
     context_object_name = 'patients'
 
@@ -46,8 +45,8 @@ class Patients(ListView):
              orthanc_server['port'],
              orthanc_server['user'],
              orthanc_server['password'],
-    )
-    
+             )
+
     # Surcharge queryset parce que l'on ne positionne pas de modèle
     # et que l'on veut juste bénéficier des facilités de gestion et d'affichage
     # offertes par la classe ListView sur un jeu de données
@@ -63,10 +62,10 @@ class Patients(ListView):
 
         # Retourne les patients
         return patients
-    
+
     # Enrichit le contexte
     def get_context_data(self, **kwargs):
-        
+
         # Appel de l'implémentation de base pour obtenir un contexte                                
         context = super().get_context_data(**kwargs)
 
@@ -74,14 +73,14 @@ class Patients(ListView):
         if 'ref' in self.kwargs:
             context['ref'] = self.kwargs['ref']
         else:
-            context['ref'] = None            
-        
-        # Retourne le contexte
+            context['ref'] = None
+
+            # Retourne le contexte
         return context
+
 
 # Un patient
 class Patient(ListView):
-
     template_name = 'zview/patient.html'
     context_object_name = 'studies'
 
@@ -91,8 +90,8 @@ class Patient(ListView):
              orthanc_server['port'],
              orthanc_server['user'],
              orthanc_server['password'],
-    )
-    
+             )
+
     # Surcharge queryset parce que l'on ne positionne pas de modèle
     # et que l'on veut juste bénéficier des facilités de gestion et d'affichage
     # offertes par la classe ListView sur un jeu de données
@@ -108,13 +107,13 @@ class Patient(ListView):
         # Pagination si l'on trouve des études
         if studies:
             self.paginate_by = params['paginate_by']
-        
+
         # Retourne ses études
         return studies
 
     # Enrichit le contexte
     def get_context_data(self, **kwargs):
-        
+
         # Appel de l'implémentation de base pour obtenir un contexte                                
         context = super().get_context_data(**kwargs)
 
@@ -128,19 +127,19 @@ class Patient(ListView):
         if 'ref' in self.kwargs:
             context['ref'] = self.kwargs['ref']
         else:
-            context['ref'] = None            
-        
-        # Retourne le contexte
+            context['ref'] = None
+
+            # Retourne le contexte
         return context
+
 
 # Des études
 class Studies(ListView):
-
     template_name = 'zview/studies.html'
     context_object_name = 'studies'
     paginate_by = params['paginate_by']
     request = None
-    object_list = {'toto': 'toto', 'tata': 'tata',}
+    object_list = {'toto': 'toto', 'tata': 'tata', }
 
     # Le serveur orthanc
     orthanc_server = get_orthanc_server()
@@ -148,8 +147,8 @@ class Studies(ListView):
              orthanc_server['port'],
              orthanc_server['user'],
              orthanc_server['password'],
-    )
-    
+             )
+
     # Surcharge queryset parce que l'on ne positionne pas de modèle
     # et que l'on veut juste bénéficier des facilités de gestion et d'affichage
     # offertes par la classe ListView sur un jeu de données
@@ -165,7 +164,7 @@ class Studies(ListView):
         # Pagination si l'on trouve des études
         if studies:
             self.paginate_by = params['paginate_by']
-        
+
         # Retourne ses études
         return studies
 
@@ -179,14 +178,14 @@ class Studies(ListView):
         if 'ref' in self.kwargs:
             context['ref'] = self.kwargs['ref']
         else:
-            context['ref'] = None            
-        
-        # Retourne le contexte
+            context['ref'] = None
+
+            # Retourne le contexte
         return context
+
 
 # Une étude
 class Study(ListView):
-
     template_name = 'zview/study.html'
     context_object_name = 'series'
 
@@ -196,8 +195,8 @@ class Study(ListView):
              orthanc_server['port'],
              orthanc_server['user'],
              orthanc_server['password'],
-    )
-    
+             )
+
     # Surcharge queryset parce que l'on ne positionne pas de modèle
     # et que l'on veut juste bénéficier des facilités de gestion et d'affichage
     # offertes par la classe ListView sur un jeu de données
@@ -213,13 +212,13 @@ class Study(ListView):
         # Pagination si l'on trouve des séries
         if series:
             self.paginate_by = params['paginate_by']
-        
+
         # Retourne les séries
         return series
 
     # Ajout le détail du patient au contexte
     def get_context_data(self, **kwargs):
-        
+
         # Appel de l'implémentation de base pour obtenir un contexte                                
         context = super().get_context_data(**kwargs)
 
@@ -228,13 +227,13 @@ class Study(ListView):
         item['stone_web_viewer'] = params['stone_web_viewer']
         item['web_viewer'] = params['web_viewer']
         context['params'] = item
-        
+
         # Récupère l'étude et enrichit le contexte
         if 'study_id' in self.kwargs:
             study = self.o.GetStudy(self.kwargs['study_id'])
         else:
             study = None
-        context['study'] = study        
+        context['study'] = study
 
         # Récupère le patient et enrichit le contexte
         if study:
@@ -247,13 +246,13 @@ class Study(ListView):
             context['ref'] = self.kwargs['ref']
         else:
             context['ref'] = None
-        
+
         # Retourne le contexte
         return context
 
+
 # Téléchargement d'une étude
 class StudyDownload(LoginRequiredMixin, TemplateView):
-
     template_name = 'zview/study_download.html'
 
     # Le serveur orthanc
@@ -262,15 +261,16 @@ class StudyDownload(LoginRequiredMixin, TemplateView):
              orthanc_server['port'],
              orthanc_server['user'],
              orthanc_server['password'],
-    )
-    
+             )
+
     # Ajout les infos au contexte
     def get_context_data(self, **kwargs):
-        
+
         # Appel de l'implémentation de base pour obtenir un contexte                                
         context = super().get_context_data(**kwargs)
 
         # Authentification
+        django_user = None
         if self.request.user.is_authenticated:
             django_user = User.objects.get(username=self.request.user.username)
             context['django_user'] = django_user
@@ -284,7 +284,7 @@ class StudyDownload(LoginRequiredMixin, TemplateView):
         else:
             study_id = None
             study = None
-        context['study'] = study        
+        context['study'] = study
 
         # Récupère le patient et enrichit le contexte
         if study:
@@ -303,13 +303,13 @@ class StudyDownload(LoginRequiredMixin, TemplateView):
             self.o.SetNewTransactionID()
             self.o.SetTransactionUser(django_user.username)
             self.o.DownloadStudy(study_id, django_user)
-        
+
         # Retourne le contexte
         return context
 
+
 # Une série
 class Serie(DetailView):
-
     template_name = 'zview/serie.html'
     context_object_name = 'serie'
 
@@ -319,8 +319,8 @@ class Serie(DetailView):
              orthanc_server['port'],
              orthanc_server['user'],
              orthanc_server['password'],
-    )
-    
+             )
+
     # Surcharge queryset parce que l'on ne positionne pas de modèle
     # et que l'on veut juste bénéficier des facilités de gestion et d'affichage
     # offertes par la classe ListView sur un jeu de données
@@ -335,7 +335,7 @@ class Serie(DetailView):
 
     # Ajout le détail du patient au contexte
     def get_context_data(self, **kwargs):
-        
+
         # Appel de l'implémentation de base pour obtenir un contexte                                
         context = super().get_context_data(**kwargs)
 
@@ -344,7 +344,7 @@ class Serie(DetailView):
             study = self.o.GetStudy(self.kwargs['study_id'])
         else:
             study = None
-        context['study'] = study        
+        context['study'] = study
 
         # Récupère le patient et enrichit le contexte
         if study:
@@ -357,13 +357,13 @@ class Serie(DetailView):
             context['ref'] = self.kwargs['ref']
         else:
             context['ref'] = None
-        
+
         # Retourne le contexte
         return context
 
+
 # Téléchargement d'une série
 class SerieDownload(LoginRequiredMixin, TemplateView):
-
     template_name = 'zview/serie_download.html'
 
     # Le serveur orthanc
@@ -372,15 +372,16 @@ class SerieDownload(LoginRequiredMixin, TemplateView):
              orthanc_server['port'],
              orthanc_server['user'],
              orthanc_server['password'],
-    )
-    
+             )
+
     # Ajout les infos au contexte
     def get_context_data(self, **kwargs):
-        
+
         # Appel de l'implémentation de base pour obtenir un contexte                                
         context = super().get_context_data(**kwargs)
 
         # Authentification
+        django_user = None
         if self.request.user.is_authenticated:
             django_user = User.objects.get(username=self.request.user.username)
             context['django_user'] = django_user
@@ -394,7 +395,7 @@ class SerieDownload(LoginRequiredMixin, TemplateView):
         else:
             serie_id = None
             serie = None
-        context['serie'] = serie        
+        context['serie'] = serie
 
         # Récupère l'étude et enrichit le contexte
         if serie:
@@ -420,6 +421,6 @@ class SerieDownload(LoginRequiredMixin, TemplateView):
             self.o.SetNewTransactionID()
             self.o.SetTransactionUser(django_user.username)
             self.o.DownloadSerie(serie_id, django_user)
-        
+
         # Retourne le contexte
         return context
