@@ -17,7 +17,6 @@ along with Menba.  If not, see <https://www.gnu.org/licenses/>.
 
 Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 """
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView, DetailView, ListView
