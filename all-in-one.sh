@@ -268,6 +268,7 @@ INSTALLED_APPS = [
     'zview.apps.ZViewConfig',
     'zsearch.apps.ZSearchConfig',
     'zinfos.apps.ZInfosConfig',
+    'zauth.apps.ZAuthConfig',
 ]
 
 MIDDLEWARE = [

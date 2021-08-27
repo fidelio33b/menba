@@ -18,24 +18,12 @@ along with Menba.  If not, see <https://www.gnu.org/licenses/>.
 Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 """
 
-from django.contrib import admin
-from django.urls import path, include
+from django.contrib.auth import views as auth_views
+from django.urls import path
+
+app_name = 'zauth'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
-    # Home page
-    path('', include('zhome.urls')),
-
-    # Authentication
-    path('auth/', include('zauth.urls')),
-
-    # Viewing data
-    path('view/', include('zview.urls')),
-
-    # Searching data
-    path('search/', include('zsearch.urls')),
-
-    # Various informations (server, statistics...)
-    path('infos/', include('zinfos.urls')),
+    # Login page
+    path('login/', auth_views.PasswordChangeView.as_view(template_name='zauth/login.html'), name='alogin'),
 ]

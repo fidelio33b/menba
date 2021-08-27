@@ -1,0 +1,21 @@
+{% extends "zhome/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% translate "informations"|capfirst %}{% endblock title %}
+
+{% block base_body %}
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="shadow breadcrumb bg-light">
+                <li class="breadcrumb-item active"><a class="s1"
+                                                      href="{% url 'zhome:index' %}">{% translate "home"|capfirst %}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{% translate "informations"|capfirst %}</li>
+            </ol>
+        </nav>
+    </div>
+
+{% endblock base_body %}
