@@ -25,5 +25,5 @@ app_name = 'zauth'
 
 urlpatterns = [
     # Login page
-    path('login/', auth_views.PasswordChangeView.as_view(template_name='zauth/login.html'), name='alogin'),
+    path('login/', auth_views.LoginView.as_view(template_name='zauth/login.html'), name='alogin'),
 ]
