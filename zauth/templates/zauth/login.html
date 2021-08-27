@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 
-{% block title %}{% translate "informations"|capfirst %}{% endblock title %}
+{% block title %}{% translate "login"|capfirst %}{% endblock title %}
 
 {% block base_body %}
 
@@ -13,9 +13,44 @@
                 <li class="breadcrumb-item active"><a class="s1"
                                                       href="{% url 'zhome:index' %}">{% translate "home"|capfirst %}</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">{% translate "informations"|capfirst %}</li>
+                <li class="breadcrumb-item active" aria-current="page">{% translate "login"|capfirst %}</li>
             </ol>
         </nav>
     </div>
+
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    <!-- Redirect -->
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+        {% else %}
+            <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <!-- Form -->
+    <form method="post" action="{% url 'zauth:alogin' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
+
+        <input type="submit" value="login">
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+
+    {# Assumes you setup the password_reset view in your URLconf #}
+    <p><a href="#">Lost password?</a></p>
 
 {% endblock base_body %}
