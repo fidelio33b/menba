@@ -18,39 +18,54 @@
         </nav>
     </div>
 
-    {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
-    {% endif %}
+    <div class="container">
+        <br>
 
-    <!-- Redirect -->
-    {% if next %}
-        {% if user.is_authenticated %}
-            <p>Your account doesn't have access to this page. To proceed,
-                please login with an account that has access.</p>
-        {% else %}
-            <p>Please login to see this page.</p>
-        {% endif %}
-    {% endif %}
+        <div class="row">
 
-    <!-- Form -->
-    <form method="post" action="{% url 'zauth:alogin' %}">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>{{ form.username.label_tag }}</td>
-                <td>{{ form.username }}</td>
-            </tr>
-            <tr>
-                <td>{{ form.password.label_tag }}</td>
-                <td>{{ form.password }}</td>
-            </tr>
-        </table>
+            <div class="col-sm-6">
+                <!-- Login card -->
+                <div class="shadow card">
+                    <h5 class="card-header">{% translate "login"|capfirst %}</h5>
+                    <div class="card-body">
+                        {% if form.errors %}
+                            <p>Your username and password didn't match. Please try again.</p>
+                        {% endif %}
 
-        <input type="submit" value="login">
-        <input type="hidden" name="next" value="{{ next }}">
-    </form>
+                        <!-- Redirect -->
+                        {% if next %}
+                            {% if user.is_authenticated %}
+                                <p>Your account doesn't have access to this page. To proceed,
+                                    please login with an account that has access.</p>
+                            {% else %}
+                                <p>Please login to see this page.</p>
+                            {% endif %}
+                        {% endif %}
 
-    {# Assumes you setup the password_reset view in your URLconf #}
-    <p><a href="#">Lost password?</a></p>
+                        <!-- Form -->
+                        <form method="post" action="{% url 'zauth:alogin' %}">
+                            {% csrf_token %}
 
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{ form.username.label_tag }}
+                                    {{ form.username }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ form.password.label_tag }}
+                                    {{ form.password }}
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary"
+                                    value="login">{% translate "login"|capfirst %}</button>
+                            <input type="hidden" name="next" value="{{ next }}">
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 {% endblock base_body %}
