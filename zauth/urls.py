@@ -21,9 +21,14 @@ Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
+from zauth import views as zauth
+
 app_name = 'zauth'
 
 urlpatterns = [
     # Login page
     path('login/', auth_views.LoginView.as_view(template_name='zauth/login.html'), name='alogin'),
+
+    # Redirected requests after login
+    path('profile/', zauth.ProfileView.as_view(), name='aprofile'),
 ]
