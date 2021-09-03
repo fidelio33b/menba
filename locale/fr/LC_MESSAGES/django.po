@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 07:50+0200\n"
+"POT-Creation-Date: 2021-09-03 08:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Laurent Lavaud <fidelio33b@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,8 +36,9 @@ msgstr ""
 msgid "login"
 msgstr "authentification"
 
-#: zauth/templates/zauth/login.html:14 zhome/templates/zhome/index.html:5
-#: zhome/templates/zhome/index.html:13 zinfos/templates/zinfos/index.html:14
+#: zauth/templates/zauth/login.html:14 zauth/templates/zauth/profile.html:14
+#: zhome/templates/zhome/index.html:5 zhome/templates/zhome/index.html:13
+#: zinfos/templates/zinfos/index.html:14
 #: zsearch/templates/zsearch/index.html:14
 #: zview/templates/zview/patient.html:15 zview/templates/zview/patients.html:14
 #: zview/templates/zview/serie.html:14
@@ -46,6 +47,11 @@ msgstr "authentification"
 #: zview/templates/zview/study_download.html:14
 msgid "home"
 msgstr "accueil"
+
+#: zauth/templates/zauth/profile.html:5 zauth/templates/zauth/profile.html:16
+#: zauth/templates/zauth/profile.html:29
+msgid "user profile"
+msgstr "profil utilisateur"
 
 #: zcommon/tasks.py:86
 #, python-format
@@ -309,8 +315,11 @@ msgid "serie download"
 msgstr "téléchargement d'une série"
 
 #: zview/templates/zview/serie_download.html:77
-#, python-format
-msgid "serie download pitch %(email_field)s."
+#, fuzzy, python-format
+#| msgid "study download pitch %(email_field)s."
+msgid ""
+"serie download pitch %(email_field)s\n"
+"            ."
 msgstr ""
 "<b>Les fichiers sont en cours de récupération.</b><br>Cette opération peut "
 "prendre plusieurs minutes.<br>Un mail adressé à %(email_field)s contenant le "
@@ -355,6 +364,12 @@ msgstr ""
 "<b>Les fichiers sont en cours de récupération.</b><br>Cette opération peut "
 "prendre plusieurs minutes.<br>Un mail adressé à %(email_field)s contenant le "
 "lien de téléchargement sera émis à l'issue."
+
+#~ msgid "serie download pitch %(email_field)s."
+#~ msgstr ""
+#~ "<b>Les fichiers sont en cours de récupération.</b><br>Cette opération "
+#~ "peut prendre plusieurs minutes.<br>Un mail adressé à %(email_field)s "
+#~ "contenant le lien de téléchargement sera émis à l'issue."
 
 #~ msgid "disk size"
 #~ msgstr "espace disque"
