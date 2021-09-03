@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 08:31+0200\n"
+"POT-Creation-Date: 2021-09-03 09:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Laurent Lavaud <fidelio33b@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,8 +33,9 @@ msgstr ""
 
 #: zauth/templates/zauth/login.html:5 zauth/templates/zauth/login.html:16
 #: zauth/templates/zauth/login.html:29 zauth/templates/zauth/login.html:63
+#: zhome/templates/zhome/base.html:58
 msgid "login"
-msgstr "authentification"
+msgstr "connexion"
 
 #: zauth/templates/zauth/login.html:14 zauth/templates/zauth/profile.html:14
 #: zhome/templates/zhome/index.html:5 zhome/templates/zhome/index.html:13
@@ -101,27 +102,39 @@ msgstr "parcourir"
 msgid "search"
 msgstr "recherche"
 
-#: zhome/templates/zhome/base.html:63
+#: zhome/templates/zhome/base.html:54
+msgid "account"
+msgstr "compte"
+
+#: zhome/templates/zhome/base.html:60
+msgid "profile"
+msgstr "profil"
+
+#: zhome/templates/zhome/base.html:62
+msgid "logout"
+msgstr "déconnexion"
+
+#: zhome/templates/zhome/base.html:79
 msgid "top of page"
 msgstr "haut de page"
 
-#: zhome/templates/zhome/base.html:70
+#: zhome/templates/zhome/base.html:86
 msgid "resources"
 msgstr "ressources"
 
-#: zhome/templates/zhome/base.html:72
+#: zhome/templates/zhome/base.html:88
 msgid "documentation"
 msgstr "documentation"
 
-#: zhome/templates/zhome/base.html:73
+#: zhome/templates/zhome/base.html:89
 msgid "contact"
 msgstr "contact"
 
-#: zhome/templates/zhome/base.html:77
+#: zhome/templates/zhome/base.html:93
 msgid "about"
 msgstr "à propos"
 
-#: zhome/templates/zhome/base.html:80 zinfos/templates/zinfos/index.html:5
+#: zhome/templates/zhome/base.html:96 zinfos/templates/zinfos/index.html:5
 #: zinfos/templates/zinfos/index.html:16
 msgid "informations"
 msgstr "informations"
