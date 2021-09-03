@@ -20,8 +20,8 @@ Laurent Lavaud <fidelio33b@gmail.com>, 2021.
 
 from django.urls import path
 
-from . import views as sviews
 from zview import views as zviews
+from . import views as sviews
 
 app_name = 'zsearch'
 
@@ -30,13 +30,15 @@ urlpatterns = [
     path('', sviews.Index.as_view(), name='index'),
 
     # Search results
-    path('patients/', sviews.Patients.as_view(), {'ref': 'search',}, name='spatients'),
-    path('studies/', sviews.Studies.as_view(), {'ref': 'search',}, name='sstudies'),
+    path('patients/', sviews.Patients.as_view(), {'ref': 'search', }, name='spatients'),
+    path('studies/', sviews.Studies.as_view(), {'ref': 'search', }, name='sstudies'),
 
     # Search details
-    path('patients/<slug:patient_id>/', zviews.Patient.as_view(), {'ref': 'search',}, name='spatient'),
-    path('studies/<slug:study_id>/', zviews.Study.as_view(), {'ref': 'search',}, name='sstudy'),
-    path('studies/<slug:study_id>/download/', zviews.StudyDownload.as_view(), {'ref': 'search',}, name='sstudydownload'),
-    path('series/<slug:serie_id>/', zviews.Serie.as_view(), {'ref': 'search',}, name='sserie'),    
-    path('series/<slug:serie_id>/download/', zviews.SerieDownload.as_view(), {'ref': 'search',}, name='sseriedownload'),
+    path('patients/<slug:patient_id>/', zviews.Patient.as_view(), {'ref': 'search', }, name='spatient'),
+    path('studies/<slug:study_id>/', zviews.Study.as_view(), {'ref': 'search', }, name='sstudy'),
+    path('studies/<slug:study_id>/download/', zviews.StudyDownload.as_view(), {'ref': 'search', },
+         name='sstudydownload'),
+    path('series/<slug:serie_id>/', zviews.Serie.as_view(), {'ref': 'search', }, name='sserie'),
+    path('series/<slug:serie_id>/download/', zviews.SerieDownload.as_view(), {'ref': 'search', },
+         name='sseriedownload'),
 ]
