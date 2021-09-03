@@ -47,10 +47,12 @@
                             {% csrf_token %}
 
                             <div class="form-row">
+                                <!-- Username -->
                                 <div class="form-group col-md-6">
                                     {{ form.username.label_tag }}
                                     {{ form.username }}
                                 </div>
+                                <!-- Password -->
                                 <div class="form-group col-md-6">
                                     {{ form.password.label_tag }}
                                     {{ form.password }}
