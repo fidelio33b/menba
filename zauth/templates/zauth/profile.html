@@ -1,0 +1,38 @@
+{% extends "zhome/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% translate "user profile"|capfirst %}{% endblock title %}
+
+{% block base_body %}
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="shadow breadcrumb bg-light">
+                <li class="breadcrumb-item active"><a class="s1"
+                                                      href="{% url 'zhome:index' %}">{% translate "home"|capfirst %}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{% translate "user profile"|capfirst %}</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="container">
+        <br>
+
+        <!-- Cards -->
+        <div class="row">
+            <div class="col-sm-6">
+                <!-- Profile card -->
+                <div class="shadow card">
+                    <h5 class="card-header">{% translate "user profile"|capfirst %}</h5>
+                    <div class="card-body">
+                        Your profile is...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock base_body %}
