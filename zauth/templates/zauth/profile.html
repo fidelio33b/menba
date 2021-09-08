@@ -24,11 +24,44 @@
         <!-- Cards -->
         <div class="row">
             <div class="col-sm-6">
+
                 <!-- Profile card -->
                 <div class="shadow card">
                     <h5 class="card-header">{% translate "user profile"|capfirst %}</h5>
                     <div class="card-body">
-                        Your profile is...
+                        {% if user.is_authenticated %}
+                            <table class="table table-hover table-sm table-borderless">
+                                <tbody></tbody>
+                                <!-- username -->
+                                <tr class="text-secondary">
+                                    <th scope="row" style="width: 40%;">{% translate "username"|capfirst %}</th>
+                                    <td>{{ user.username }}</td>
+                                </tr>
+                                <!-- firstname -->
+                                {% if user.first_name %}
+                                    <tr class="text-secondary">
+                                        <th scope="row" style="width: 40%;">{% translate "firstname"|capfirst %}</th>
+                                        <td>{{ user.first_name }}</td>
+                                    </tr>
+                                {% endif %}
+                                <!-- lastname -->
+                                {% if user.last_name %}
+                                    <tr class="text-secondary">
+                                        <th scope="row" style="width: 40%;">{% translate "lastname"|capfirst %}</th>
+                                        <td>{{ user.last_name }}</td>
+                                    </tr>
+                                {% endif %}
+                                <!-- email -->
+                                <tr class="text-secondary">
+                                    <th scope="row" style="width: 40%;">{% translate "email"|capfirst %}</th>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>Please login to see this page.</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
