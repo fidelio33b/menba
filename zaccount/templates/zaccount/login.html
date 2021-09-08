@@ -29,7 +29,7 @@
                     <h5 class="card-header">{% translate "login"|capfirst %}</h5>
                     <div class="card-body">
                         {% if form.errors %}
-                            <p>Your username and password didn't match. Please try again.</p>
+                            <p>{% translate "Your username and password didn't match. Please try again." %}</p>
                         {% endif %}
 
                         <!-- Redirect -->
@@ -63,6 +63,8 @@
                                     value="login">{% translate "login"|capfirst %}</button>
                             <input type="hidden" name="next" value="{{ next }}">
                         </form>
+
+                        <p><a href="{% url 'zaccount:apassword_reset' %}">{% translate "Lost password ?"</a></p>
 
                     </div>
                 </div>
