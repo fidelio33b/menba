@@ -21,5 +21,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 
 
+# To view the profile
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'zaccount/profile.html'
+
+
+# To reset the password
+class PasswordResetView(LoginRequiredMixin, TemplateView):
+    template_name = 'zaccount/password_reset_form.html'
