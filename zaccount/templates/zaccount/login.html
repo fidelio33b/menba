@@ -64,7 +64,9 @@
                             <input type="hidden" name="next" value="{{ next }}">
                         </form>
 
-                        <p><a href="{% url 'zaccount:apassword_reset' %}">{% translate "Lost password ?"</a></p>
+                        <br>
+                        <p><a href="{% url 'zaccount:apassword_reset' %}">{% translate "lost password ?"|capfirst %}</a>
+                        </p>
 
                     </div>
                 </div>
