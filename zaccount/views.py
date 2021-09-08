@@ -29,3 +29,8 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 # To reset the password
 class PasswordResetView(LoginRequiredMixin, TemplateView):
     template_name = 'zaccount/password_reset_form.html'
+
+
+# To confirm the password reset
+class PasswordResetConfirmView(LoginRequiredMixin, TemplateView):
+    template_name = 'zaccount/password_reset_confirm.html'
