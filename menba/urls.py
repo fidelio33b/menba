@@ -27,8 +27,8 @@ urlpatterns = [
     # Home page
     path('', include('zhome.urls')),
 
-    # Authentication
-    path('auth/', include('zauth.urls')),
+    # Account
+    path('account/', include('zaccount.urls')),
 
     # Viewing data
     path('view/', include('zview.urls')),

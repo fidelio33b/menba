@@ -22,4 +22,4 @@ from django.views.generic import TemplateView
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):
-    template_name = 'zauth/profile.html'
+    template_name = 'zaccount/profile.html'
