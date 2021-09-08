@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 09:17+0200\n"
+"POT-Creation-Date: 2021-09-08 08:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Laurent Lavaud <fidelio33b@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,13 +31,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: zauth/templates/zauth/login.html:5 zauth/templates/zauth/login.html:16
-#: zauth/templates/zauth/login.html:29 zauth/templates/zauth/login.html:63
-#: zhome/templates/zhome/base.html:58
+#: zaccount/templates/zaccount/login.html:5
+#: zaccount/templates/zaccount/login.html:16
+#: zaccount/templates/zaccount/login.html:29
+#: zaccount/templates/zaccount/login.html:63 zhome/templates/zhome/base.html:58
 msgid "login"
 msgstr "connexion"
 
-#: zauth/templates/zauth/login.html:14 zauth/templates/zauth/profile.html:14
+#: zaccount/templates/zaccount/login.html:14
+#: zaccount/templates/zaccount/profile.html:14
 #: zhome/templates/zhome/index.html:5 zhome/templates/zhome/index.html:13
 #: zinfos/templates/zinfos/index.html:14
 #: zsearch/templates/zsearch/index.html:14
@@ -49,10 +51,37 @@ msgstr "connexion"
 msgid "home"
 msgstr "accueil"
 
-#: zauth/templates/zauth/profile.html:5 zauth/templates/zauth/profile.html:16
-#: zauth/templates/zauth/profile.html:29
+#: zaccount/templates/zaccount/login.html:32
+msgid "Your username and password didn't match. Please try again."
+msgstr "Votre nom et/ou votre mot de passe est/sont incorrect(s).<br>Veuillez réessayer."
+
+#: zaccount/templates/zaccount/profile.html:5
+#: zaccount/templates/zaccount/profile.html:16
+#: zaccount/templates/zaccount/profile.html:30
 msgid "user profile"
 msgstr "profil utilisateur"
+
+#: zaccount/templates/zaccount/profile.html:37
+#, fuzzy
+#| msgid "name"
+msgid "username"
+msgstr "nom"
+
+#: zaccount/templates/zaccount/profile.html:43
+#, fuzzy
+#| msgid "name"
+msgid "firstname"
+msgstr "nom"
+
+#: zaccount/templates/zaccount/profile.html:50
+#, fuzzy
+#| msgid "name"
+msgid "lastname"
+msgstr "nom"
+
+#: zaccount/templates/zaccount/profile.html:56
+msgid "email"
+msgstr ""
 
 #: zcommon/tasks.py:86
 #, python-format
