@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-08 08:08+0200\n"
+"POT-Creation-Date: 2021-09-08 08:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Laurent Lavaud <fidelio33b@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,6 +39,7 @@ msgid "login"
 msgstr ""
 
 #: zaccount/templates/zaccount/login.html:14
+#: zaccount/templates/zaccount/password_reset_form.html:14
 #: zaccount/templates/zaccount/profile.html:14
 #: zhome/templates/zhome/index.html:5 zhome/templates/zhome/index.html:13
 #: zinfos/templates/zinfos/index.html:14
@@ -53,6 +54,16 @@ msgstr "home"
 
 #: zaccount/templates/zaccount/login.html:32
 msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: zaccount/templates/zaccount/login.html:68
+msgid "lost password ?"
+msgstr ""
+
+#: zaccount/templates/zaccount/password_reset_form.html:5
+#: zaccount/templates/zaccount/password_reset_form.html:16
+#: zaccount/templates/zaccount/password_reset_form.html:29
+msgid "password reset"
 msgstr ""
 
 #: zaccount/templates/zaccount/profile.html:5
