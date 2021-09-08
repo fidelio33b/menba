@@ -31,4 +31,7 @@ urlpatterns = [
 
     # Redirected requests after login
     path('profile/', zaccount.ProfileView.as_view(), name='aprofile'),
+
+    # Reset password
+    path('password_reset/', zaccount.PasswordResetView.as_view(), name='apassword_reset'),
 ]
