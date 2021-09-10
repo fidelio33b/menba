@@ -26,10 +26,11 @@ from zaccount import views as zaccount
 app_name = 'zaccount'
 
 urlpatterns = [
-    # Login page
+    # Login and logout pages
     path('login/', auth_views.LoginView.as_view(template_name='zaccount/login.html'), name='alogin'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='zaccount/logout.html'), name='alogout'),
 
-    # Redirected requests after login
+    # Redirected requests after login : profile page
     path('profile/', zaccount.ProfileView.as_view(), name='aprofile'),
 
     # Reset password
