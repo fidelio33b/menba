@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-08 08:38+0200\n"
+"POT-Creation-Date: 2021-09-10 07:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Laurent Lavaud <fidelio33b@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,6 +39,8 @@ msgid "login"
 msgstr "connexion"
 
 #: zaccount/templates/zaccount/login.html:14
+#: zaccount/templates/zaccount/logout.html:14
+#: zaccount/templates/zaccount/password_reset_confirm.html:14
 #: zaccount/templates/zaccount/password_reset_form.html:14
 #: zaccount/templates/zaccount/profile.html:14
 #: zhome/templates/zhome/index.html:5 zhome/templates/zhome/index.html:13
@@ -62,6 +64,25 @@ msgstr ""
 msgid "lost password ?"
 msgstr "mot de passe perdu ?"
 
+#: zaccount/templates/zaccount/logout.html:5
+#: zaccount/templates/zaccount/logout.html:16
+#: zaccount/templates/zaccount/logout.html:29
+#: zhome/templates/zhome/base.html:62
+msgid "logout"
+msgstr "déconnexion"
+
+#: zaccount/templates/zaccount/logout.html:30
+msgid "logout successfull"
+msgstr "Vous vous êtes déconnecté(e) avec succès."
+
+#: zaccount/templates/zaccount/password_reset_confirm.html:5
+#: zaccount/templates/zaccount/password_reset_confirm.html:17
+#, fuzzy
+#| msgid "password reset"
+msgid "password reset confirm"
+msgstr "changement de mot de passe"
+
+#: zaccount/templates/zaccount/password_reset_confirm.html:30
 #: zaccount/templates/zaccount/password_reset_form.html:5
 #: zaccount/templates/zaccount/password_reset_form.html:16
 #: zaccount/templates/zaccount/password_reset_form.html:29
@@ -151,10 +172,6 @@ msgstr "compte"
 #: zhome/templates/zhome/base.html:60
 msgid "profile"
 msgstr "profil"
-
-#: zhome/templates/zhome/base.html:62
-msgid "logout"
-msgstr "déconnexion"
 
 #: zhome/templates/zhome/base.html:79
 msgid "top of page"
