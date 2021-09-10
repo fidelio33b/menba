@@ -1,0 +1,38 @@
+{% extends "zhome/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% translate "logout"|capfirst %}{% endblock title %}
+
+{% block base_body %}
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="shadow breadcrumb bg-light">
+                <li class="breadcrumb-item active"><a class="s1"
+                                                      href="{% url 'zhome:index' %}">{% translate "home"|capfirst %}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{% translate "logout"|capfirst %}</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="container">
+        <br>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <!-- logout card -->
+                <div class="shadow card">
+                    <h5 class="card-header">{% translate "logout"|capfirst %}</h5>
+                    <div class="card-body">
+                        {% translate 'logout successfull' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock base_body %}
