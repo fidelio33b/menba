@@ -35,6 +35,8 @@ urlpatterns = [
 
     # Reset password
     path('password_reset/', zaccount.PasswordResetView.as_view(), name='apassword_reset'),
-    path('password_reset_confirm/<uidb64>/<token>/', zaccount.PasswordResetConfirmView.as_view(),
+    path('password_reset/done/', zaccount.PasswordResetDoneView.as_view(), name='apassword_reset_done'),
+    path('reset/<uidb64>/<token>/', zaccount.PasswordResetConfirmView.as_view(),
          name='apassword_reset_confirm'),
+    path('reset/done/', zaccount.PasswordResetCompleteView.as_view(), name='apassword_reset_complete'),
 ]
